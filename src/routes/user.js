@@ -1,9 +1,9 @@
 const express = require("express");
 
-const router = express.Router();;
+const router = express.Router();
 
-router.get('/auth',async(req,res)=>{
-    res.send('success')
-});
+const userController = require('../controllers/userController')
+
+router.post('/auth',userController.userLogin);
 
 module.exports = router

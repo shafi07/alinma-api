@@ -6,7 +6,7 @@ const app = express()
 const PORT = 8000
 
 // commonQueryModel.exexuteQuery()
-
+app.use(express.json());
 app.use(routes)
 
 app.listen(PORT, () => {

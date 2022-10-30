@@ -1,9 +1,12 @@
 const express = require("express");
 
-const router = express.Router();;
+const router = express.Router();
 
-router.get('/',async(req,res)=>{
-    res.send('success2323')
-});
+const javasathController = require('../controllers/javasthController')
+
+router.post('/',javasathController.createJavasth);
+router.get('/',javasathController.getAllJavasath);
+router.delete('/:id',javasathController.deleteJavasath);
+router.put('/',javasathController.updateJavasath);
 
 module.exports = router

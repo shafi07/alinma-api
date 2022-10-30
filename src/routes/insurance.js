@@ -1,9 +1,12 @@
 const express = require("express");
 
-const router = express.Router();;
+const router = express.Router();
 
-router.get('/',async(req,res)=>{
-    res.send('success2323')
-});
+const insuranceController = require('../controllers/insuranceController')
+
+router.post('/', insuranceController.createInsurance);
+router.get('/', insuranceController.getAllInsurance);
+router.delete('/:id', insuranceController.deleteInsurance);
+router.put('/', insuranceController.updateInsurance);
 
 module.exports = router
