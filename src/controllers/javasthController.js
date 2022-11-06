@@ -16,7 +16,14 @@ module.exports = {
 
     async getAllJavasath(req,res) {
         try {
-            let allJavasath = await commonQuery.exexuteQuery(javsath.GET_ALL_JAVASATH)
+            let allJavasath
+            let { pageNo = 0, query } = req.query;
+            offset = pageNo * 10
+            if(query){
+             allJavasath = await commonQuery.exexuteQuery(javsath.GET_ALL_JAVASATH_QUERY,[query])
+             return res.send(allJavasath.rows) 
+            }
+            allJavasath = await commonQuery.exexuteQuery(javsath.GET_ALL_JAVASATH)
             return res.send(allJavasath.rows)
         } catch (error) {
             console.log(error)
@@ -56,10 +63,11 @@ async function newJavasath(data) {
     try {
         const { sponser_name, name, id_number, purpose, iqama, insurance, other, total_amount,
             paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category } = data
-        let javasath = await commonQuery.exexuteQuery(javsath.CREATE_NEW, [sponser_name, name, id_number, purpose, iqama, insurance, other, total_amount,
+        let javasath = await commonQuery.exexuteQuery(javsath.CREATE_NEW_JAVASATH, [sponser_name, name, id_number, purpose, iqama, insurance, other, total_amount,
             paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category])
         return true
     } catch (error) {
         console.log(error)
+        throw error
     }
 }
