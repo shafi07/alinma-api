@@ -6,6 +6,10 @@ const app = express()
 const PORT = process.env.PORT || 8000
 
 // commonQueryModel.exexuteQuery()
+app.get('/',(req,res)=>{
+    res.send('hello')
+})
+
 app.use(cors())
 app.use(express.json());
 app.use(routes)
