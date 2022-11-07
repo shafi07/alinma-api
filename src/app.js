@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 8000
 
 // commonQueryModel.exexuteQuery()
 app.get('/',(req,res)=>{
-    res.send('hello')
+    res.send('Welcome to alinma_Travels')
 })
 
 app.use(cors())
