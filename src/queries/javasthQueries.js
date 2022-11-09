@@ -8,7 +8,7 @@ FROM javasath LIMIT 100`
 
 const GET_ALL_JAVASATH_QUERY = `SELECT id,sponser_name,name,id_number,purpose,iqama,insurance,other,
 total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,createdTime
-FROM javasath WHERE name=$1 OR sponser_name=$1  LIMIT 100`
+FROM javasath WHERE name= %$1% OR sponser_name= %$1%  LIMIT 100`
 
 const UPDATE_JAVASATH = `UPDATE javasath SET modifiedTime = current_timestamp, paid_amount = (paid_amount + $2) WHERE id = $1`
 
