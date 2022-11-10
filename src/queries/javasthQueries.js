@@ -3,11 +3,11 @@ total_amount,paid_amount,service,mobileNumber,createdUser,updatedUser,mol,sub_ca
 VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)`
 
 const GET_ALL_JAVASATH = `SELECT id,sponser_name,name,id_number,purpose,iqama,insurance,other,
-total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,createdTime
+total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,createdTime,fileId
 FROM javasath LIMIT 100`
 
 const GET_ALL_JAVASATH_QUERY = `SELECT id,sponser_name,name,id_number,purpose,iqama,insurance,other,
-total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,createdTime
+total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,createdTime,fileId
 FROM javasath WHERE LOWER(name) = LOWER($1) OR LOWER(sponser_name) = LOWER($1)  LIMIT 100`
 
 const UPDATE_JAVASATH = `UPDATE javasath SET modifiedTime = current_timestamp, paid_amount = (paid_amount + $2) WHERE id = $1`
