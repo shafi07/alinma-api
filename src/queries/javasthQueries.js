@@ -2,9 +2,9 @@ const CREATE_NEW_JAVASATH = `INSERT INTO javasath (sponser_name,name,id_number,p
 total_amount,paid_amount,service,mobileNumber,createdUser,updatedUser,mol,sub_category) 
 VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)`
 
-const GET_ALL_JAVASATH = `SELECT id,sponser_name,name,id_number,purpose,iqama,insurance,other,
+const GET_ALL_JAVASATH = `SELECT DISTINCT ON(createdTime) id,sponser_name,name,id_number,purpose,iqama,insurance,other,
 total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,createdTime,fileId
-FROM javasath LIMIT 100`
+FROM javasath ORDER BY createdTime LIMIT 100`
 
 const GET_ALL_JAVASATH_QUERY = `SELECT id,sponser_name,name,id_number,purpose,iqama,insurance,other,
 total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,createdTime,fileId
