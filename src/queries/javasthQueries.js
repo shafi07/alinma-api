@@ -6,7 +6,7 @@ const GET_ALL_JAVASATH = `SELECT DISTINCT ON(createdTime) id,sponser_name,name,i
 total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,createdTime,fileId
 FROM javasath ORDER BY createdTime DESC LIMIT 100`
 
-const GET_ALL_JAVASATH_QUERY = `SELECT id,sponser_name,name,id_number,purpose,iqama,insurance,other,
+const GET_ALL_JAVASATH_QUERY = `SELECT DISTINCT ON(fileId,name) id,sponser_name,name,id_number,purpose,iqama,insurance,other,
 total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,createdTime,fileId
 FROM javasath WHERE LOWER(fileId) = LOWER($1) OR LOWER(name) = LOWER($1)  LIMIT 100`
 
