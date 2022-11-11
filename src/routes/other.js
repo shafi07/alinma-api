@@ -1,9 +1,12 @@
 const express = require("express");
 
-const router = express.Router();;
+const router = express.Router();
 
-router.get('/',async(req,res)=>{
-    res.send('success2323')
-});
+const otherController = require('../controllers/otherController')
+
+router.post('/', otherController.createOther);
+router.get('/', otherController.getAllOthers);
+router.delete('/:id', otherController.deleteOther);
+router.put('/', otherController.updateOther);
 
 module.exports = router

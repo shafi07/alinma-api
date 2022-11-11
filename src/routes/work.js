@@ -1,9 +1,12 @@
 const express = require("express");
 
-const router = express.Router();;
+const router = express.Router();
 
-router.get('/',async(req,res)=>{
-    res.send('success2323')
-});
+const workController = require('../controllers/workController')
+
+router.post('/', workController.createWork);
+router.get('/', workController.getAllWork);
+router.delete('/:id', workController.deleteWork);
+router.put('/', workController.updateWork);
 
 module.exports = router
