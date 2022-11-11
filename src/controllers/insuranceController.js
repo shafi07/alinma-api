@@ -63,7 +63,7 @@ async function newInsurance(data) {
     try {
         const { name, id_number, add_or_new, dob, total_amount,
             paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category } = data
-        await commonQuery.exexuteQuery(insurance.CREATE_NEW_INSURANCE, [name, id_number, add_or_new, dob, total_amount,
+        await commonQuery.exexuteQuery(insurance.CREATE_NEW_INSURANCE, [name, id_number, dob, total_amount,
             paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category])
         return true
     } catch (error) {

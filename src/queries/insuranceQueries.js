@@ -1,14 +1,14 @@
-const CREATE_NEW_INSURANCE = `INSERT INTO insurance (sponser_name,name,id_number,purpose,iqama,insurance,other,
-    total_amount,paid_amount,service,mobileNumber,createdUser,updatedUser,mol,sub_category) 
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)`
+const CREATE_NEW_INSURANCE = `INSERT INTO insurance (name,id_number,dob,
+    total_amount,paid_amount,agent,mobileNumber,createdUser,updatedUser,sub_category) 
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`
 
-const GET_ALL_INSURANCE = `SELECT DISTINCT ON(createdTime) id,sponser_name,name,id_number,purpose,iqama,insurance,other,
-    total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,fileId
+const GET_ALL_INSURANCE = `SELECT DISTINCT ON(createdTime) id,name,id_number,
+    total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId
     FROM insurance ORDER BY createdTime DESC LIMIT 100`
 
-const GET_ALL_INSURANCE_QUERY = `SELECT DISTINCT ON(fileId,name) id,sponser_name,name,id_number,purpose,iqama,insurance,other,
-    total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,fileId
-    FROM insurance fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%'  LIMIT 100`
+const GET_ALL_INSURANCE_QUERY = `SELECT DISTINCT ON(fileId,name) id,name,id_number,
+    total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId
+    FROM insurance WHERE fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%'  LIMIT 100`
 
 const UPDATE_INSURANCE = `UPDATE insurance SET modifiedTime = current_timestamp, paid_amount = (paid_amount + $2) WHERE id = $1`
 
