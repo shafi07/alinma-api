@@ -20,7 +20,7 @@ module.exports = {
             let { pageNo = 0, query } = req.query;
             offset = pageNo * 10
             if (query) {
-                allInsurance = await commonQuery.exexuteQuery(insurance.GET_ALL_INSURANCE_QUERY)
+                allInsurance = await commonQuery.exexuteQuery(insurance.GET_ALL_INSURANCE_QUERY,[query])
                 return res.send(allInsurance.rows)
             }
             allInsurance = await commonQuery.exexuteQuery(insurance.GET_ALL_INSURANCE)
