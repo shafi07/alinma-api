@@ -64,7 +64,7 @@ async function newOther(data) {
         const { name, id_number, total_amount,
             paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name } = data
         await commonQuery.exexuteQuery(other.CREATE_NEW_OTHER, [name, id_number, total_amount,
-            paid_amount, mobileNumber, createdUser, updatedUser, sub_category])
+            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name])
         return true
     } catch (error) {
         console.log(error)
