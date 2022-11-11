@@ -62,9 +62,9 @@ module.exports = {
 async function newJavasath(data) {
     try {
         const { sponser_name, name, id_number, purpose, iqama, insurance, other, total_amount,
-            paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category } = data
+            paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category, remarks } = data
         let javasath = await commonQuery.exexuteQuery(javsath.CREATE_NEW_JAVASATH, [sponser_name, name, id_number, purpose, iqama, insurance, other, total_amount,
-            paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category])
+            paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category,remarks])
         return true
     } catch (error) {
         console.log(error)

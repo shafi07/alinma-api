@@ -1,6 +1,6 @@
 const CREATE_NEW_JAVASATH = `INSERT INTO javasath (sponser_name,name,id_number,purpose,iqama,insurance,other,
-total_amount,paid_amount,service,mobileNumber,createdUser,updatedUser,mol,sub_category) 
-VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)`
+total_amount,paid_amount,service,mobileNumber,createdUser,updatedUser,mol,sub_category,remarks) 
+VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)`
 
 const GET_ALL_JAVASATH = `SELECT DISTINCT ON(createdTime) id,sponser_name,name,id_number,purpose,iqama,insurance,other,
 total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,createdTime,fileId

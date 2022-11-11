@@ -16,8 +16,15 @@ module.exports = {
 
     async getAllInsurance(req, res) {
         try {
-            let allJavasath = await commonQuery.exexuteQuery(insurance.GET_ALL_JAVASATH)
-            return res.send(allJavasath.rows)
+            let allInsurance
+            let { pageNo = 0, query } = req.query;
+            offset = pageNo * 10
+            if (query) {
+                allInsurance = await commonQuery.exexuteQuery(insurance.GET_ALL_INSURANCE_QUERY)
+                return res.send(allInsurance.rows)
+            }
+            allInsurance = await commonQuery.exexuteQuery(insurance.GET_ALL_INSURANCE)
+            return res.send(allInsurance.rows)
         } catch (error) {
             console.log(error)
             return res.status(500).json({ message: "internel server error" });
@@ -27,7 +34,7 @@ module.exports = {
     async deleteInsurance(req, res) {
         try {
             const { id } = req.params;
-            await commonQuery.exexuteQuery(insurance.DELETE_JAVASATH, [id]);
+            await commonQuery.exexuteQuery(insurance.DELETE_INSURANCE, [id]);
             return res.status(200).json({
                 message: "Insurance deleted successfully",
             });
