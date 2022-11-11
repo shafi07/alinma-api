@@ -6,5 +6,6 @@ routes.use('/user', require('./user'))
 routes.use('/javasath', require('./javasath'))
 routes.use('/insurance', require('./insurance'))
 routes.use('/work', require('./work'))
+routes.use('/other', require('./other'))
 
 module.exports = routes
