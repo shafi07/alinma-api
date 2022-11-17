@@ -74,9 +74,9 @@ module.exports = {
 async function newWork(data) {
     try {
         const { name, id_number, total_amount,
-            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name } = data
+            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name,agent_amount,service,paid_date,remarks } = data
         await commonQuery.exexuteQuery(work.CREATE_NEW_WORK, [name, id_number, total_amount,
-            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name])
+            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name,agent_amount,service,paid_date,remarks])
         return true
     } catch (error) {
         console.log(error)

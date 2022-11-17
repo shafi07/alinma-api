@@ -74,9 +74,9 @@ module.exports = {
 async function newInsurance(data) {
     try {
         const { name, id_number, dob, total_amount,
-            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category,sponser_name } = data
+            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,service,agent_amount,paid_date,remarks } = data
         await commonQuery.exexuteQuery(insurance.CREATE_NEW_INSURANCE, [name, id_number, dob, total_amount,
-            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category,sponser_name])
+            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,service,agent_amount,paid_date,remarks])
         return true
     } catch (error) {
         console.log(error)
