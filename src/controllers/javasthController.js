@@ -14,14 +14,20 @@ module.exports = {
         }
     },
 
-    async getAllJavasath(req,res) {
+    async getAllJavasath(req, res) {
         try {
             let allJavasath
-            let { pageNo = 0, query } = req.query;
+            let { pageNo = 0, query, status } = req.query;
             offset = pageNo * 10
-            if(query){
-             allJavasath = await commonQuery.exexuteQuery(javsath.GET_ALL_JAVASATH_QUERY,[query])
-             return res.send(allJavasath.rows) 
+            if (query && !status) {
+                allJavasath = await commonQuery.exexuteQuery(javsath.GET_ALL_JAVASATH_QUERY, [query])
+                return res.send(allJavasath.rows)
+            } else if (status && !query) {
+                allJavasath = await commonQuery.exexuteQuery(javsath.GET_ALL_JAVASATH_STATUS,[status])
+                return res.send(allJavasath.rows)
+            } else if (query && status) {
+                allJavasath = await commonQuery.exexuteQuery(javsath.GET_ALL_JAVASATH_STATUS_QUERY,[query,status])
+                return res.send(allJavasath.rows)
             }
             allJavasath = await commonQuery.exexuteQuery(javsath.GET_ALL_JAVASATH)
             return res.send(allJavasath.rows)

@@ -6,7 +6,7 @@ module.exports = {
         try {
             await newOther(req.body)
             return res.status(200).json({
-                message: "Other created successfully",
+                message: "Other service created successfully",
             });
         } catch (error) {
             console.log(error)
