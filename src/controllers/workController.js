@@ -17,10 +17,16 @@ module.exports = {
     async getAllWork(req, res) {
         try {
             let allWork
-            let { pageNo = 0, query } = req.query;
+            let { pageNo = 0, query, status } = req.query;
             offset = pageNo * 10
-            if (query) {
-                allWork = await commonQuery.exexuteQuery(work.GET_ALL_WORK_QUERY,[query])
+            if (query && !status) {
+                allWork = await commonQuery.exexuteQuery(work.GET_ALL_WORK_QUERY, [query])
+                return res.send(allWork.rows)
+            } else if (status && !query) {
+                allWork = await commonQuery.exexuteQuery(work.GET_ALL_WORK_STATUS, [status])
+                return res.send(allWork.rows)
+            } else if (query && status) {
+                allWork = await commonQuery.exexuteQuery(work.GET_ALL_WORK_QUERY_STATUS, [query, status])
                 return res.send(allWork.rows)
             }
             allWork = await commonQuery.exexuteQuery(work.GET_ALL_WORK)
@@ -47,7 +53,13 @@ module.exports = {
 
     async updateWork(req, res) {
         try {
-            const { id, paid_amount } = req.body
+            const { id, paid_amount, status } = req.body
+            if (status) {
+                await commonQuery.exexuteQuery(work.UPDATE_WORK_STATUS, [id, status])
+                return res.status(200).json({
+                    message: "Work Status Updated successfully",
+                });
+            }
             await commonQuery.exexuteQuery(work.UPDATE_WORK, [id, paid_amount])
             return res.status(200).json({
                 message: "Work Updated successfully",

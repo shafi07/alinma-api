@@ -51,16 +51,22 @@ module.exports = {
         }
     },
 
-    async updateJavasath (req,res) {
+    async updateJavasath(req, res) {
         try {
-            const{id,paid_amount}= req.body
-            await commonQuery.exexuteQuery(javsath.UPDATE_JAVASATH,[id,paid_amount])
+            const { id, paid_amount,status } = req.body
+            if (status) {
+                await commonQuery.exexuteQuery(javsath.UPDATE_JAVASATH_STATUS, [id, status])
+                return res.status(200).json({
+                    message: "Javasath Status Updated successfully",
+                });
+            }
+            await commonQuery.exexuteQuery(javsath.UPDATE_JAVASATH, [id, paid_amount])
             return res.status(200).json({
                 message: "javasath Updated successfully",
             });
         } catch (error) {
             console.log(error)
-            return res.status(500).json({ message: "internel server error" }); 
+            return res.status(500).json({ message: "internel server error" });
         }
     }
 }

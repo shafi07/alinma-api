@@ -17,10 +17,16 @@ module.exports = {
     async getAllInsurance(req, res) {
         try {
             let allInsurance
-            let { pageNo = 0, query } = req.query;
+            let { pageNo = 0, query, status } = req.query;
             offset = pageNo * 10
-            if (query) {
-                allInsurance = await commonQuery.exexuteQuery(insurance.GET_ALL_INSURANCE_QUERY,[query])
+            if (query && !status) {
+                allInsurance = await commonQuery.exexuteQuery(insurance.GET_ALL_INSURANCE_QUERY, [query])
+                return res.send(allInsurance.rows)
+            } else if (status && !query) {
+                allInsurance = await commonQuery.exexuteQuery(insurance.GET_ALL_INSURANCE_STATUS,[status])
+                return res.send(allInsurance.rows)
+            } else if (query && status) {
+                allInsurance = await commonQuery.exexuteQuery(insurance.GET_ALL_INSURANCE_QUERY_STATUS,[query,status])
                 return res.send(allInsurance.rows)
             }
             allInsurance = await commonQuery.exexuteQuery(insurance.GET_ALL_INSURANCE)
@@ -47,7 +53,13 @@ module.exports = {
 
     async updateInsurance(req, res) {
         try {
-            const { id, paid_amount } = req.body
+            const { id, paid_amount, status } = req.body
+            if (status) {
+                await commonQuery.exexuteQuery(insurance.UPDATE_INSURANCE_STATUS, [id, status])
+                return res.status(200).json({
+                    message: "Insurance Status Updated successfully",
+                });
+            }
             await commonQuery.exexuteQuery(insurance.UPDATE_INSURANCE, [id, paid_amount])
             return res.status(200).json({
                 message: "Insurance Updated successfully",

@@ -17,10 +17,16 @@ module.exports = {
     async getAllOthers(req, res) {
         try {
             let allOthers
-            let { pageNo = 0, query } = req.query;
+            let { pageNo = 0, query, status } = req.query;
             offset = pageNo * 10
-            if (query) {
-                allOthers = await commonQuery.exexuteQuery(other.GET_ALL_OTHER_QUERY,[query])
+            if (query && !status) {
+                allOthers = await commonQuery.exexuteQuery(other.GET_ALL_OTHER_QUERY, [query])
+                return res.send(allOthers.rows)
+            } else if (status && !query) {
+                allOthers = await commonQuery.exexuteQuery(other.GET_ALL_OTHER_STATUS, [status])
+                return res.send(allOthers.rows)
+            } else if (query && status) {
+                allOthers = await commonQuery.exexuteQuery(other.GET_ALL_OTHER_QUERY_STATUS, [query, status])
                 return res.send(allOthers.rows)
             }
             allOthers = await commonQuery.exexuteQuery(other.GET_ALL_OTHER)
@@ -47,7 +53,13 @@ module.exports = {
 
     async updateOther(req, res) {
         try {
-            const { id, paid_amount } = req.body
+            const { id, paid_amount,status } = req.body
+            if(status){
+                await commonQuery.exexuteQuery(other.UPDATE_OTHER_STATUS, [id, status])
+                return res.status(200).json({
+                    message: "Other Service Status Updated successfully",
+                }); 
+            }
             await commonQuery.exexuteQuery(other.UPDATE_OTHER, [id, paid_amount])
             return res.status(200).json({
                 message: "Other Service Updated successfully",
