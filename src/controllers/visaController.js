@@ -74,9 +74,9 @@ module.exports = {
 async function newVisa(data) {
     try {
         const { name, id_number, total_amount,
-            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks } = data
+            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,visa_number } = data
         await commonQuery.exexuteQuery(visa.CREATE_NEW_VISA, [name, id_number, total_amount,
-            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks])
+            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,visa_number])
         return true
     } catch (error) {
         console.log(error)
