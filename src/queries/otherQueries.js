@@ -12,7 +12,7 @@ const GET_ALL_OTHER_QUERY = `SELECT DISTINCT ON(fileId,name) id,name,id_number,s
 
 const GET_ALL_OTHER_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status
-    FROM other WHERE name = $1 LIMIT 100`
+    FROM other WHERE status = $1 LIMIT 100`
 
 const GET_ALL_OTHER_QUERY_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status
