@@ -14,7 +14,7 @@ module.exports = {
         }
     },
 
-    async getAllExpense(req, res) {
+    async getAllExpense(req, res) { 
         try {
             let allExpense
             let { pageNo = 0, query } = req.query;

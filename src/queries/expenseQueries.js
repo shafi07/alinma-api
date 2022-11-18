@@ -5,7 +5,7 @@ const GET_ALL_EXPENSE = `SELECT DISTINCT ON(createdTime) id,total_amount,fileId,
     FROM expense ORDER BY createdTime DESC LIMIT 100`
 
 const GET_ALL_EXPENSE_QUERY = `SELECT DISTINCT ON(createdTime) id,total_amount,fileId,electricity,telephone,salary,stationary,other,remarks,createdTime
-    FROM expense WHERE createdTime ILIKE '%' || $1 || '%'  LIMIT 100`
+    FROM expense WHERE CAST(createdTime AS VARCHAR) LIKE '%' || $1 || '%'  LIMIT 100`
 
 // const GET_ALL_VISA_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,visa_number,
 //     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
