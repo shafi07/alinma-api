@@ -8,6 +8,6 @@ routes.use('/insurance', require('./insurance'))
 routes.use('/work', require('./work'))
 routes.use('/other', require('./other'))
 routes.use('/visa', require('./visa'))
-routes.use('/visa', require('./expense'))
+routes.use('/expense', require('./expense'))
 
 module.exports = routes
