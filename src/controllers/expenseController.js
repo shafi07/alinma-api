@@ -61,8 +61,8 @@ module.exports = {
 
 async function newExpense(data) {
     try {
-        const { electricity,telephone,salary,stationary,other,createdUser, updatedUser,remarks} = data
-        await commonQuery.exexuteQuery(expense.CREATE_NEW_EXPENSE, [electricity,telephone,salary,stationary,other,createdUser, updatedUser,remarks])
+        const { electricity,telephone,salary,stationary,other,createdUser, updatedUser,remarks,total_amount} = data
+        await commonQuery.exexuteQuery(expense.CREATE_NEW_EXPENSE, [electricity,telephone,salary,stationary,other,createdUser, updatedUser,remarks,total_amount])
         return true
     } catch (error) {
         console.log(error)
