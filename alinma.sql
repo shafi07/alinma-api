@@ -132,3 +132,21 @@ modifiedTime TIMESTAMP WITHOUT TIME ZONE,
 	FOREIGN KEY(createdUser) references users(id),
 	FOREIGN KEY(updatedUser) references users(id)
 );
+
+CREATE TABLE IF NOT EXISTS expense(
+id SERIAL PRIMARY KEY,
+fileId VARCHAR GENERATED ALWAYS AS ('EX' || id::VARCHAR) STORED,
+electricity NUMERIC,
+other NUMERIC,
+total_amount NUMERIC GENERATED ALWAYS AS (electricity+telephone+salary+stationary+other) STORED,
+stationary NUMERIC,
+salary NUMERIC,
+telephone NUMERIC,
+createdUser INTEGER,
+updatedUser INTEGER,
+remarks TEXT,
+createdTime TIMESTAMP WITHOUT TIME ZONE default current_timestamp,
+modifiedTime TIMESTAMP WITHOUT TIME ZONE,
+	FOREIGN KEY(createdUser) references users(id),
+	FOREIGN KEY(updatedUser) references users(id)
+);
