@@ -1,6 +1,6 @@
 const CREATE_NEW_WORK = `INSERT INTO work (name,id_number,
     total_amount,paid_amount,agent,mobileNumber,createdUser,updatedUser,sub_category,sponser_name,agent_amount,service,paid_date,remarks) 
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)`
 
 const GET_ALL_WORK = `SELECT DISTINCT ON(createdTime) id,name,id_number,sponser_name,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
