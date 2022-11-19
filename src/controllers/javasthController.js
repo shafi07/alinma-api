@@ -1,5 +1,6 @@
 const commonQuery = require('../models/commonQueryModel')
 const javsath = require('../queries/javasthQueries')
+const moment = require('moment')
 
 module.exports = {
     async createJavasth(req, res) {
@@ -60,7 +61,8 @@ module.exports = {
                     message: "Javasath Status Updated successfully",
                 });
             }
-            await commonQuery.exexuteQuery(javsath.UPDATE_JAVASATH, [id, paid_amount])
+            let date = moment().format("DD-MM-YYYY")
+            await commonQuery.exexuteQuery(javsath.UPDATE_JAVASATH, [id, paid_amount,(`{"amount":"${paid_amount}","date":"${date}"}`)])
             return res.status(200).json({
                 message: "javasath Updated successfully",
             });
@@ -75,8 +77,9 @@ async function newJavasath(data) {
     try {
         const { sponser_name, name, id_number, purpose, iqama, insurance, other, total_amount,
             paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category, remarks } = data
+        let date = moment().format("DD-MM-YYYY")
         let javasath = await commonQuery.exexuteQuery(javsath.CREATE_NEW_JAVASATH, [sponser_name, name, id_number, purpose, iqama, insurance, other, total_amount,
-            paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category,remarks])
+            paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category, remarks, (`{"amount":"${paid_amount}","date":"${date}"}`)])
         return true
     } catch (error) {
         console.log(error)

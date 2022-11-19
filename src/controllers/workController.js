@@ -1,5 +1,6 @@
 const commonQuery = require('../models/commonQueryModel')
 const work = require('../queries/workQueries')
+const moment = require('moment')
 
 module.exports = {
     async createWork(req, res) {
@@ -60,7 +61,8 @@ module.exports = {
                     message: "Work Status Updated successfully",
                 });
             }
-            await commonQuery.exexuteQuery(work.UPDATE_WORK, [id, paid_amount])
+            let date = moment().format("DD-MM-YYYY")
+            await commonQuery.exexuteQuery(work.UPDATE_WORK, [id, paid_amount,(`{"amount":"${paid_amount}","date":"${date}"}`)])
             return res.status(200).json({
                 message: "Work Updated successfully",
             });
@@ -75,8 +77,9 @@ async function newWork(data) {
     try {
         const { name, id_number, total_amount,
             paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name,agent_amount,service,paid_date,remarks } = data
+        let date = moment().format("DD-MM-YYYY")
         await commonQuery.exexuteQuery(work.CREATE_NEW_WORK, [name, id_number, total_amount,
-            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name,agent_amount,service,paid_date,remarks])
+            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name,agent_amount,service,paid_date,remarks,(`{"amount":"${paid_amount}","date":"${date}"}`)])
         return true
     } catch (error) {
         console.log(error)

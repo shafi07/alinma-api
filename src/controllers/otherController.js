@@ -1,5 +1,6 @@
 const commonQuery = require('../models/commonQueryModel')
 const other = require('../queries/otherQueries')
+const moment = require('moment')
 
 module.exports = {
     async createOther(req, res) {
@@ -60,7 +61,8 @@ module.exports = {
                     message: "Other Service Status Updated successfully",
                 }); 
             }
-            await commonQuery.exexuteQuery(other.UPDATE_OTHER, [id, paid_amount])
+            let date = moment().format("DD-MM-YYYY")
+            await commonQuery.exexuteQuery(other.UPDATE_OTHER, [id, paid_amount,(`{"amount":"${paid_amount}","date":"${date}"}`)])
             return res.status(200).json({
                 message: "Other Service Updated successfully",
             });
@@ -73,10 +75,11 @@ module.exports = {
 
 async function newOther(data) {
     try {
-        const { name, id_number, total_amount,
-            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks } = data
+        const { name, id_number, total_amount,paid_amount, mobileNumber, createdUser, updatedUser, 
+            sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks } = data
+        let date = moment().format("DD-MM-YYYY")
         await commonQuery.exexuteQuery(other.CREATE_NEW_OTHER, [name, id_number, total_amount,
-            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks])
+            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,(`{"amount":"${paid_amount}","date":"${date}"}`)])
         return true
     } catch (error) {
         console.log(error)

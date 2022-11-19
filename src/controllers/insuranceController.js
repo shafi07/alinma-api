@@ -1,5 +1,6 @@
 const commonQuery = require('../models/commonQueryModel')
 const insurance = require('../queries/insuranceQueries')
+const moment = require('moment')
 
 module.exports = {
     async createInsurance(req, res) {
@@ -60,7 +61,8 @@ module.exports = {
                     message: "Insurance Status Updated successfully",
                 });
             }
-            await commonQuery.exexuteQuery(insurance.UPDATE_INSURANCE, [id, paid_amount])
+            let date = moment().format("DD-MM-YYYY")
+            await commonQuery.exexuteQuery(insurance.UPDATE_INSURANCE, [id, paid_amount,(`{"amount":"${paid_amount}","date":"${date}"}`)])
             return res.status(200).json({
                 message: "Insurance Updated successfully",
             });
@@ -75,8 +77,9 @@ async function newInsurance(data) {
     try {
         const { name, id_number, dob, total_amount,
             paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,service,agent_amount,paid_date,remarks } = data
+        let date = moment().format("DD-MM-YYYY")
         await commonQuery.exexuteQuery(insurance.CREATE_NEW_INSURANCE, [name, id_number, dob, total_amount,
-            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,service,agent_amount,paid_date,remarks])
+            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,service,agent_amount,paid_date,remarks,(`{"amount":"${paid_amount}","date":"${date}"}`)])
         return true
     } catch (error) {
         console.log(error)
