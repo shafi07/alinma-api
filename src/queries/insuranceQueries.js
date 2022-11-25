@@ -6,15 +6,15 @@ const GET_ALL_INSURANCE = `SELECT DISTINCT ON(createdTime) id,name,id_number,dob
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,count(*) OVER() AS full_count
     FROM insurance ORDER BY createdTime DESC LIMIT 100`
 
-const GET_ALL_INSURANCE_QUERY = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,
+const GET_ALL_INSURANCE_QUERY = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,createdTime,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,service,agent_amount,paid_date,remarks,amount_paid_dates
     FROM insurance WHERE fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%'  LIMIT 100`
 
-const GET_ALL_INSURANCE_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,
+const GET_ALL_INSURANCE_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,createdTime,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,service,agent_amount,paid_date,remarks,amount_paid_dates
     FROM insurance WHERE status = $1  LIMIT 100`
 
-const GET_ALL_INSURANCE_QUERY_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,
+const GET_ALL_INSURANCE_QUERY_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,createdTime,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,service,agent_amount,paid_date,remarks,amount_paid_dates
     FROM insurance WHERE (fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
 

@@ -20,6 +20,15 @@ module.exports = {
             let allVisa
             let { pageNo = 0, query, status } = req.query;
             offset = pageNo * 10
+            if (status && status == 'credit') {
+                if (status && !query) {
+                    allVisa = await commonQuery.exexuteQuery(visa.GET_ALL_VISA_CREDIT)
+                    return res.send(allVisa.rows)
+                } else if (query && status) {
+                    allVisa = await commonQuery.exexuteQuery(visa.GET_ALL_VISA_QUERY_CREDIT, [query])
+                    return res.send(allVisa.rows)
+                }
+            }
             if (query && !status) {
                 allVisa = await commonQuery.exexuteQuery(visa.GET_ALL_VISA_QUERY, [query])
                 return res.send(allVisa.rows)

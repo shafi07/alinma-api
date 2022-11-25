@@ -6,15 +6,15 @@ const GET_ALL_WORK = `SELECT DISTINCT ON(createdTime) id,name,id_number,sponser_
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
     FROM work ORDER BY createdTime DESC LIMIT 100`
 
-const GET_ALL_WORK_QUERY = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,amount_paid_dates,
+const GET_ALL_WORK_QUERY = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,amount_paid_dates,createdTime,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
     FROM work WHERE fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%'  LIMIT 100`
 
-const GET_ALL_WORK_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,amount_paid_dates,
+const GET_ALL_WORK_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,amount_paid_dates,createdTime,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
     FROM work WHERE status = $1  LIMIT 100`
 
-const GET_ALL_WORK_QUERY_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,amount_paid_dates,
+const GET_ALL_WORK_QUERY_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,amount_paid_dates,createdTime,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
     FROM work WHERE (fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
 
