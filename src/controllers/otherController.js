@@ -20,6 +20,15 @@ module.exports = {
             let allOthers
             let { pageNo = 0, query, status } = req.query;
             offset = pageNo * 10
+            if (status && status == 'credit') {
+                if (status && !query) {
+                    allOthers = await commonQuery.exexuteQuery(other.GET_ALL_OTHER_CREDIT)
+                return res.send(allOthers.rows)
+                } else if (query && status) {
+                    allOthers = await commonQuery.exexuteQuery(other.GET_ALL_OTHER_CREDIT_QUERY, [query])
+                    return res.send(allOthers.rows)
+                }
+            }
             if (query && !status) {
                 allOthers = await commonQuery.exexuteQuery(other.GET_ALL_OTHER_QUERY, [query])
                 return res.send(allOthers.rows)

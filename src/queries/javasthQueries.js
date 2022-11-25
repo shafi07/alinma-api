@@ -18,6 +18,14 @@ const GET_ALL_JAVASATH_STATUS_QUERY = `SELECT DISTINCT ON(fileId,name) id,sponse
 total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,createdTime,fileId,status,amount_paid_dates
 FROM javasath WHERE (fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
 
+const GET_ALL_JAVASATH_CREDIT = `SELECT DISTINCT ON(fileId,name) id,sponser_name,name,id_number,purpose,iqama,insurance,other,
+total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,createdTime,fileId,status,amount_paid_dates
+FROM javasath WHERE balance_amount != '0'`
+
+const GET_ALL_JAVASATH_QUERY_CREDIT = `SELECT DISTINCT ON(fileId,name) id,sponser_name,name,id_number,purpose,iqama,insurance,other,
+total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,createdTime,fileId,status,amount_paid_dates
+FROM javasath WHERE (fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%') AND balance_amount != '0'  LIMIT 100`
+
 const UPDATE_JAVASATH = `UPDATE javasath SET modifiedTime = current_timestamp, paid_amount = (paid_amount + $2), amount_paid_dates = amount_paid_dates || $3::jsonb WHERE id = $1`
 
 const UPDATE_JAVASATH_STATUS = `UPDATE javasath SET modifiedTime = current_timestamp, status = $2 WHERE id = $1`
@@ -32,5 +40,7 @@ module.exports = {
     GET_ALL_JAVASATH_STATUS_QUERY,
     DELETE_JAVASATH,
     UPDATE_JAVASATH,
-    UPDATE_JAVASATH_STATUS
+    UPDATE_JAVASATH_STATUS,
+    GET_ALL_JAVASATH_CREDIT,
+    GET_ALL_JAVASATH_QUERY_CREDIT
 }

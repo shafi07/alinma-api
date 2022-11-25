@@ -20,6 +20,15 @@ module.exports = {
             let allInsurance
             let { pageNo = 0, query, status } = req.query;
             offset = pageNo * 10
+            if (status && status == 'credit') {
+                if (status && !query) {
+                    allInsurance = await commonQuery.exexuteQuery(insurance.GET_ALL_INSURANCE_CRRDIT)
+                    return res.send(allInsurance.rows)
+                } else if (query && status) {
+                    allInsurance = await commonQuery.exexuteQuery(insurance.GET_ALL_INSURANCE_CREDIT_QUERY, [query])
+                    return res.send(allInsurance.rows)
+                }
+            }
             if (query && !status) {
                 allInsurance = await commonQuery.exexuteQuery(insurance.GET_ALL_INSURANCE_QUERY, [query])
                 return res.send(allInsurance.rows)

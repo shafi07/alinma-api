@@ -20,6 +20,15 @@ module.exports = {
             let allJavasath
             let { pageNo = 0, query, status } = req.query;
             offset = pageNo * 10
+            if (status && status == 'credit') {
+                if (status && !query) {
+                    allJavasath = await commonQuery.exexuteQuery(javsath.GET_ALL_JAVASATH_CREDIT)
+                    return res.send(allJavasath.rows)
+                } else if (query && status) {
+                    allJavasath = await commonQuery.exexuteQuery(javsath.GET_ALL_JAVASATH_QUERY_CREDIT, [query])
+                    return res.send(allJavasath.rows)
+                }
+            }
             if (query && !status) {
                 allJavasath = await commonQuery.exexuteQuery(javsath.GET_ALL_JAVASATH_QUERY, [query])
                 return res.send(allJavasath.rows)

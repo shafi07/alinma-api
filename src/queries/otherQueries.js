@@ -18,6 +18,14 @@ const GET_ALL_OTHER_QUERY_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_n
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
     FROM other WHERE (fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
 
+const GET_ALL_OTHER_CREDIT = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,amount_paid_dates,createdTime,
+    total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
+    FROM other WHERE balance_amount != '0' LIMIT 100`
+
+const GET_ALL_OTHER_CREDIT_QUERY = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,amount_paid_dates,createdTime,
+    total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
+    FROM other WHERE (fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%') AND balance_amount != '0' LIMIT 100`
+
 const UPDATE_OTHER = `UPDATE other SET modifiedTime = current_timestamp, paid_amount = (paid_amount + $2), amount_paid_dates = amount_paid_dates || $3::jsonb WHERE id = $1`
 
 const UPDATE_OTHER_STATUS = `UPDATE other SET modifiedTime = current_timestamp, status = $2 WHERE id = $1`
@@ -32,5 +40,7 @@ module.exports = {
     GET_ALL_OTHER_QUERY,
     GET_ALL_OTHER_STATUS,
     GET_ALL_OTHER_QUERY_STATUS,
-    UPDATE_OTHER_STATUS
+    UPDATE_OTHER_STATUS,
+    GET_ALL_OTHER_CREDIT,
+    GET_ALL_OTHER_CREDIT_QUERY
 }
