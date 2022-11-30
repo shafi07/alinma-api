@@ -1,10 +1,10 @@
 const CREATE_NEW_EXPENSE = `INSERT INTO expense (electricity,telephone,salary,stationary,other,createdUser, updatedUser,remarks,total_amount) 
     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`
 
-const GET_ALL_EXPENSE = `SELECT DISTINCT ON(createdTime) id,total_amount,fileId,electricity,telephone,salary,stationary,other,remarks,createdTime 
+const GET_ALL_EXPENSE = `SELECT DISTINCT ON(createdTime) id,total_amount,fileId,electricity,telephone,salary,stationary,other,remarks,to_char(createdTime,'DD/MM/YYYY') createdTime 
     FROM expense ORDER BY createdTime DESC LIMIT 100`
 
-const GET_ALL_EXPENSE_QUERY = `SELECT DISTINCT ON(createdTime) id,total_amount,fileId,electricity,telephone,salary,stationary,other,remarks,createdTime
+const GET_ALL_EXPENSE_QUERY = `SELECT DISTINCT ON(createdTime) id,total_amount,fileId,electricity,telephone,salary,stationary,other,remarks,to_char(createdTime,'DD/MM/YYYY') createdTime
     FROM expense WHERE CAST(createdTime AS VARCHAR) LIKE '%' || $1 || '%'  LIMIT 100`
 
 // const GET_ALL_VISA_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,visa_number,

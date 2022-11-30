@@ -2,27 +2,27 @@ const CREATE_NEW_INSURANCE = `INSERT INTO insurance (name,id_number,dob,
     total_amount,paid_amount,agent,mobileNumber,createdUser,updatedUser,sub_category,sponser_name,service,agent_amount,paid_date,remarks,amount_paid_dates) 
     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,ARRAY[$16]::json[])`
 
-const GET_ALL_INSURANCE = `SELECT DISTINCT ON(createdTime) id,name,id_number,dob,sponser_name,status,service,agent_amount,paid_date,remarks,amount_paid_dates,
+const GET_ALL_INSURANCE = `SELECT DISTINCT ON(createdTime) id,name,id_number,dob,sponser_name,status,service,agent_amount,paid_date,remarks,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdTime,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,count(*) OVER() AS full_count
     FROM insurance ORDER BY createdTime DESC LIMIT 100`
 
-const GET_ALL_INSURANCE_QUERY = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,createdTime,
+const GET_ALL_INSURANCE_QUERY = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdTime,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,service,agent_amount,paid_date,remarks,amount_paid_dates
     FROM insurance WHERE fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%'  LIMIT 100`
 
-const GET_ALL_INSURANCE_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,createdTime,
+const GET_ALL_INSURANCE_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdTime,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,service,agent_amount,paid_date,remarks,amount_paid_dates
     FROM insurance WHERE status = $1  LIMIT 100`
 
-const GET_ALL_INSURANCE_QUERY_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,createdTime,
+const GET_ALL_INSURANCE_QUERY_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdTime,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,service,agent_amount,paid_date,remarks,amount_paid_dates
     FROM insurance WHERE (fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
 
-const GET_ALL_INSURANCE_CRRDIT = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,createdTime,
+const GET_ALL_INSURANCE_CRRDIT = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdTime,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,service,agent_amount,paid_date,remarks,amount_paid_dates
     FROM insurance WHERE balance_amount != '0'  LIMIT 100`
 
-const GET_ALL_INSURANCE_CREDIT_QUERY = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,createdTime,
+const GET_ALL_INSURANCE_CREDIT_QUERY = `SELECT DISTINCT ON(fileId,name) id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdTime,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,service,agent_amount,paid_date,remarks,amount_paid_dates
     FROM insurance WHERE (fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%') AND balance_amount != '0'  LIMIT 100`
 
