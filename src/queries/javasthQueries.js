@@ -3,7 +3,7 @@ total_amount,paid_amount,service,mobileNumber,createdUser,updatedUser,mol,sub_ca
 VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,ARRAY[$17]::json[])`
 
 const GET_ALL_JAVASATH = `SELECT DISTINCT ON(createdTime) id,sponser_name,name,id_number,purpose,iqama,insurance,other,amount_paid_dates,remarks,
-total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,to_char(createdTime,'DD/MM/YYYY') createdTime,fileId,status,count(*) OVER() AS full_count
+total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,createdTime,fileId,status,count(*) OVER() AS full_count
 FROM javasath ORDER BY createdTime DESC LIMIT 100`
 
 const GET_ALL_JAVASATH_QUERY = `SELECT DISTINCT ON(fileId,name) id,sponser_name,name,id_number,purpose,iqama,insurance,other,
