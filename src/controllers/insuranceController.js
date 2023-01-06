@@ -85,10 +85,11 @@ module.exports = {
 async function newInsurance(data) {
     try {
         const { name, id_number, dob, total_amount,
-            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,service,agent_amount,paid_date,remarks } = data
+            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, 
+            sponser_name, service, agent_amount, paid_date, remarks } = data
         let date = moment().format("DD-MM-YYYY")
         await commonQuery.exexuteQuery(insurance.CREATE_NEW_INSURANCE, [name, id_number, dob, total_amount,
-            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,service,agent_amount,paid_date,remarks,(`{"amount":"${paid_amount}","date":"${date}"}`)])
+            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name, service, agent_amount, paid_date, remarks, (`{"amount":"${paid_amount}","date":"${date}"}`)])
         return true
     } catch (error) {
         console.log(error)
