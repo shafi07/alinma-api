@@ -85,10 +85,10 @@ module.exports = {
 async function newJavasath(data) {
     try {
         const { sponser_name, name, id_number, purpose, iqama, insurance, other, total_amount,
-            paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category, remarks } = data
+            paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category, remarks, agent, agent_amount, paid_date, professionName, newSponser } = data
         let date = moment().format("DD-MM-YYYY")
         let javasath = await commonQuery.exexuteQuery(javsath.CREATE_NEW_JAVASATH, [sponser_name, name, id_number, purpose, iqama, insurance, other, total_amount,
-            paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category, remarks, (`{"amount":"${paid_amount}","date":"${date}"}`)])
+            paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category, remarks, (`{"amount":"${paid_amount}","date":"${date}"}`), agent, agent_amount, paid_date, professionName, newSponser ])
         return true
     } catch (error) {
         console.log(error)
