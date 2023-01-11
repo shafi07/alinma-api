@@ -30,6 +30,8 @@ const UPDATE_OTHER = `UPDATE other SET modifiedTime = current_timestamp, paid_am
 
 const UPDATE_OTHER_STATUS = `UPDATE other SET modifiedTime = current_timestamp, status = $2 WHERE id = $1`
 
+const UPDATE_OTHER_AGENT_DETAILS = `UPDATE other SET agent = $2, agent_amount = $3, paid_date = $4 WHERE id = $1`
+
 const DELETE_OTHER = `DELETE FROM other WHERE id = $1`
 
 module.exports = {
@@ -42,5 +44,6 @@ module.exports = {
     GET_ALL_OTHER_QUERY_STATUS,
     UPDATE_OTHER_STATUS,
     GET_ALL_OTHER_CREDIT,
-    GET_ALL_OTHER_CREDIT_QUERY
+    GET_ALL_OTHER_CREDIT_QUERY,
+    UPDATE_OTHER_AGENT_DETAILS
 }

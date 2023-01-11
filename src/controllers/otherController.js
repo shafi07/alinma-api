@@ -63,12 +63,18 @@ module.exports = {
 
     async updateOther(req, res) {
         try {
-            const { id, paid_amount,status } = req.body
+            const { id, paid_amount,status,agent_amount,agent,paid_date } = req.body
             if(status){
                 await commonQuery.exexuteQuery(other.UPDATE_OTHER_STATUS, [id, status])
                 return res.status(200).json({
                     message: "Other Service Status Updated successfully",
                 }); 
+            }
+            if(agent_amount){
+                await commonQuery.exexuteQuery(other.UPDATE_OTHER_AGENT_DETAILS, [id, agent, agent_amount, paid_date])
+                return res.status(200).json({
+                    message: "Other Agent Details Updated successfully",
+                });
             }
             let date = moment().format("DD-MM-YYYY")
             await commonQuery.exexuteQuery(other.UPDATE_OTHER, [id, paid_amount,(`{"amount":"${paid_amount}","date":"${date}"}`)])

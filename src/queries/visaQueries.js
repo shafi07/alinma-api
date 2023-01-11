@@ -31,6 +31,8 @@ const UPDATE_VISA = `UPDATE visa SET modifiedTime = current_timestamp, paid_amou
 
 const UPDATE_VISA_STATUS = `UPDATE visa SET modifiedTime = current_timestamp, status = $2 WHERE id = $1`
 
+const UPDATE_VISA_AGENT_DETAILS = `UPDATE visa SET agent = $2, agent_amount = $3, paid_date = $4 WHERE id = $1`
+
 const DELETE_VISA = `DELETE FROM visa WHERE id = $1`
 
 module.exports = {
@@ -43,5 +45,6 @@ module.exports = {
     GET_ALL_VISA_QUERY_STATUS,
     UPDATE_VISA_STATUS,
     GET_ALL_VISA_CREDIT,
-    GET_ALL_VISA_QUERY_CREDIT
+    GET_ALL_VISA_QUERY_CREDIT,
+    UPDATE_VISA_AGENT_DETAILS
 }

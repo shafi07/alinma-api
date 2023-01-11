@@ -30,6 +30,8 @@ const UPDATE_INSURANCE = `UPDATE insurance SET modifiedTime = current_timestamp,
 
 const UPDATE_INSURANCE_STATUS = `UPDATE insurance SET modifiedTime = current_timestamp, status = $2 WHERE id = $1`
 
+const UPDATE_INSURANCE_AGENT_DETAILS = `UPDATE insurance SET agent = $2, agent_amount = $3, paid_date = $4 WHERE id = $1`
+
 const DELETE_INSURANCE = `DELETE FROM insurance WHERE id = $1`
 
 module.exports = {
@@ -42,5 +44,6 @@ module.exports = {
     GET_ALL_INSURANCE_QUERY_STATUS,
     UPDATE_INSURANCE_STATUS,
     GET_ALL_INSURANCE_CRRDIT,
-    GET_ALL_INSURANCE_CREDIT_QUERY
+    GET_ALL_INSURANCE_CREDIT_QUERY,
+    UPDATE_INSURANCE_AGENT_DETAILS
 }

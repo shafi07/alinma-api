@@ -30,6 +30,8 @@ const UPDATE_JAVASATH = `UPDATE javasath SET modifiedTime = current_timestamp, p
 
 const UPDATE_JAVASATH_STATUS = `UPDATE javasath SET modifiedTime = current_timestamp, status = $2 WHERE id = $1`
 
+const UPDATE_JAVASATH_AGENT_DETAILS = `UPDATE javasath SET agent = $2, agent_amount = $3, paid_date = $4 WHERE id = $1`
+
 const DELETE_JAVASATH = `DELETE FROM javasath WHERE id = $1`
 
 module.exports = {
@@ -42,5 +44,6 @@ module.exports = {
     UPDATE_JAVASATH,
     UPDATE_JAVASATH_STATUS,
     GET_ALL_JAVASATH_CREDIT,
-    GET_ALL_JAVASATH_QUERY_CREDIT
+    GET_ALL_JAVASATH_QUERY_CREDIT,
+    UPDATE_JAVASATH_AGENT_DETAILS
 }

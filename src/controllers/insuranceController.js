@@ -63,11 +63,17 @@ module.exports = {
 
     async updateInsurance(req, res) {
         try {
-            const { id, paid_amount, status } = req.body
+            const { id, paid_amount,status,agent_amount,agent,paid_date} = req.body
             if (status) {
                 await commonQuery.exexuteQuery(insurance.UPDATE_INSURANCE_STATUS, [id, status])
                 return res.status(200).json({
                     message: "Insurance Status Updated successfully",
+                });
+            }
+            if(agent_amount){
+                await commonQuery.exexuteQuery(insurance.UPDATE_INSURANCE_AGENT_DETAILS, [id, agent, agent_amount, paid_date])
+                return res.status(200).json({
+                    message: "Insurance Agent Details Updated successfully",
                 });
             }
             let date = moment().format("DD-MM-YYYY")

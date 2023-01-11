@@ -30,6 +30,8 @@ const UPDATE_WORK = `UPDATE work SET modifiedTime = current_timestamp, paid_amou
 
 const UPDATE_WORK_STATUS = `UPDATE work SET modifiedTime = current_timestamp, status = $2 WHERE id = $1`
 
+const UPDATE_WORK_AGENT_DETAILS = `UPDATE work SET agent = $2, agent_amount = $3, paid_date = $4 WHERE id = $1`
+
 const DELETE_WORK = `DELETE FROM work WHERE id = $1`
 
 module.exports = {
@@ -42,5 +44,6 @@ module.exports = {
     GET_ALL_WORK_QUERY_STATUS,
     UPDATE_WORK_STATUS,
     GET_ALL_WORK_CREDIT,
-    GET_ALL_WORK_CREDIT_QUERY
+    GET_ALL_WORK_CREDIT_QUERY,
+    UPDATE_WORK_AGENT_DETAILS
 }

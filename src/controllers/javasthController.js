@@ -63,14 +63,20 @@ module.exports = {
 
     async updateJavasath(req, res) {
         try {
-            const { id, paid_amount,status } = req.body
+            const { id, paid_amount,status,agent_amount,agent,paid_date} = req.body
             if (status) {
                 await commonQuery.exexuteQuery(javsath.UPDATE_JAVASATH_STATUS, [id, status])
                 return res.status(200).json({
                     message: "Javasath Status Updated successfully",
                 });
             }
-            let date = moment().format("DD-MM-YYYY")
+            if(agent_amount){
+                await commonQuery.exexuteQuery(javsath.UPDATE_JAVASATH_AGENT_DETAILS, [id, agent, agent_amount, paid_date])
+                return res.status(200).json({
+                    message: "Javasath Agent Details Updated successfully",
+                });
+            }
+            let date = moment().format("DD-MM-YYYY") 
             await commonQuery.exexuteQuery(javsath.UPDATE_JAVASATH, [id, paid_amount,(`{"amount":"${paid_amount}","date":"${date}"}`)])
             return res.status(200).json({
                 message: "javasath Updated successfully",
@@ -82,7 +88,7 @@ module.exports = {
     }
 }
 
-async function newJavasath(data) {
+async function newJavasath(data) { 
     try {
         const { sponser_name, name, id_number, purpose, iqama, insurance, other, total_amount,
             paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category, remarks, agent, agent_amount, paid_date, professionName, newSponser } = data
