@@ -8,7 +8,7 @@ const GET_ALL_VISA = `SELECT DISTINCT ON(createdTime) id,name,id_number,sponser_
 
 const GET_ALL_VISA_QUERY = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdTime,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
-    FROM visa WHERE fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%'  LIMIT 100`
+    FROM visa WHERE fileId ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%'  LIMIT 100`
 
 const GET_ALL_VISA_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdTime,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
@@ -16,7 +16,7 @@ const GET_ALL_VISA_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,s
 
 const GET_ALL_VISA_QUERY_STATUS = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdTime,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
-    FROM visa WHERE (fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
+    FROM visa WHERE (fileId ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
 
 const GET_ALL_VISA_CREDIT = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdTime,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
@@ -24,7 +24,7 @@ const GET_ALL_VISA_CREDIT = `SELECT DISTINCT ON(fileId,name) id,name,id_number,s
 
 const GET_ALL_VISA_QUERY_CREDIT = `SELECT DISTINCT ON(fileId,name) id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdTime,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
-    FROM visa WHERE (fileId ILIKE '%' || $1 || '%' OR name ILIKE '%' || $1 || '%') AND balance_amount != '0'  LIMIT 100`
+    FROM visa WHERE (fileId ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%') AND balance_amount != '0'  LIMIT 100`
 
 
 const UPDATE_VISA = `UPDATE visa SET modifiedTime = current_timestamp, paid_amount = (paid_amount + $2), amount_paid_dates = amount_paid_dates || $3::jsonb WHERE id = $1`
