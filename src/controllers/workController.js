@@ -91,10 +91,10 @@ module.exports = {
 async function newWork(data) {
     try {
         const { name, id_number, total_amount,
-            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name,agent_amount,service,paid_date,remarks } = data
+        paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name,agent_amount,service,paid_date,remarks,government_fee } = data
         let date = moment().format("DD-MM-YYYY")
         await commonQuery.exexuteQuery(work.CREATE_NEW_WORK, [name, id_number, total_amount,
-            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name,agent_amount,service,paid_date,remarks,(`{"amount":"${paid_amount}","date":"${date}"}`)])
+            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name,agent_amount,service,paid_date,remarks,(`{"amount":"${paid_amount}","date":"${date}"}`),government_fee,])
         return true
     } catch (error) {
         console.log(error)
