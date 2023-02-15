@@ -91,10 +91,10 @@ module.exports = {
 async function newVisa(data) {
     try {
         const { name, id_number, total_amount,
-            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,visa_number,chamber_amount } = data
+            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,visa_number,chamber_amount,government_fee } = data
         let date = moment().format("DD-MM-YYYY")
         await commonQuery.exexuteQuery(visa.CREATE_NEW_VISA, [name, id_number, total_amount,
-            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,visa_number,(`{"amount":"${paid_amount}","date":"${date}"}`),chamber_amount])
+            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,visa_number,(`{"amount":"${paid_amount}","date":"${date}"}`),chamber_amount,government_fee])
         return true
     } catch (error) {
         console.log(error)
