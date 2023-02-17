@@ -63,7 +63,7 @@ module.exports = {
 
     async updateVisa(req, res) {
         try {
-            const { id, paid_amount,status,agent_amount,agent,paid_date } = req.body
+            const { id, paid_amount,status,agent_amount,agent,paid_date} = req.body
             if(status){
                 await commonQuery.exexuteQuery(visa.UPDATE_VISA_STATUS, [id, status])
                 return res.status(200).json({
@@ -80,6 +80,21 @@ module.exports = {
             await commonQuery.exexuteQuery(visa.UPDATE_VISA, [id, paid_amount,(`{"amount":"${paid_amount}","date":"${date}"}`)])
             return res.status(200).json({
                 message: "Visa Updated successfully",
+            });
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({ message: "internel server error" });
+        }
+    },
+
+    async patchVisa(req, res) {
+        try {
+            const { id, name, id_number, total_amount, mobileNumber, sub_category, sponser_name,
+                service, remarks, visa_number, chamber_amount, government_fee,agent_amount,agent,paid_date } = req.body
+            await commonQuery.exexuteQuery(visa.PATCH_VISA, [id, name, id_number, total_amount, mobileNumber, sub_category, sponser_name,
+                service, remarks, visa_number, chamber_amount, government_fee,agent_amount,agent,paid_date]);
+            return res.status(200).json({
+                message: "Visa Data Updated successfully",
             });
         } catch (error) {
             console.log(error)

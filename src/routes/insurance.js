@@ -8,5 +8,6 @@ router.post('/', insuranceController.createInsurance);
 router.get('/', insuranceController.getAllInsurance);
 router.delete('/:id', insuranceController.deleteInsurance);
 router.put('/', insuranceController.updateInsurance);
+router.patch('/', insuranceController.patchInsurance);
 
 module.exports = router

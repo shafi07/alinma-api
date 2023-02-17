@@ -85,6 +85,20 @@ module.exports = {
             console.log(error)
             return res.status(500).json({ message: "internel server error" });
         }
+    },
+
+    async patchWork(req, res) {
+        try {
+            const { id, agent_amount, agent, paid_date, name, id_number,
+                total_amount, mobileNumber, sub_category, sponser_name, service, remarks, government_fee } = req.body
+            await commonQuery.exexuteQuery(work.PATCH_WORK,[id, agent, agent_amount, paid_date, name, id_number, total_amount, mobileNumber, sub_category, sponser_name, service, remarks, government_fee])
+            return res.status(200).json({
+                message: "Work Data Updated successfully",
+            });
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({ message: "internel server error" });
+        }
     }
 }
 

@@ -85,6 +85,20 @@ module.exports = {
             console.log(error)
             return res.status(500).json({ message: "internel server error" });
         }
+    },
+
+    async patchOther(req, res) {
+        try {
+            const { id, agent_amount, agent, paid_date, name, id_number, total_amount, mobileNumber, sub_category,
+                sponser_name, service, remarks } = req.body
+            await commonQuery.exexuteQuery(other.PATCH_OTHER, [id, agent, agent_amount, paid_date, name, id_number, total_amount, mobileNumber, sub_category, sponser_name, service, remarks])
+            return res.status(200).json({
+                message: "Other Data Updated successfully",
+            });
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({ message: "internel server error" });
+        }
     }
 }
 

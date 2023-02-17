@@ -85,6 +85,21 @@ module.exports = {
             console.log(error)
             return res.status(500).json({ message: "internel server error" });
         }
+    },
+
+    async patchJavasath(req, res) {
+        try {
+            const { id, agent_amount, agent, paid_date, sponser_name, name, id_number, purpose, iqama, insurance,
+                other, total_amount, paid_amount, service, mobileNumber, mol, sub_category, remarks, professionName, newSponser } = req.body
+            commonQuery.exexuteQuery(javsath.PATCH_JAVASATH, [id, agent, agent_amount, paid_date, sponser_name, name, id_number, purpose, iqama, insurance,
+                other, total_amount, paid_amount, service, mobileNumber, mol, sub_category, remarks, professionName, newSponser])
+            return res.status(200).json({
+                message: "Javasath Data Updated successfully",
+            });
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({ message: "internel server error" });
+        }
     }
 }
 

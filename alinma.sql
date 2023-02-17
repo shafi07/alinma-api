@@ -162,3 +162,7 @@ modifiedTime TIMESTAMP WITHOUT TIME ZONE,
 	FOREIGN KEY(createdUser) references users(id),
 	FOREIGN KEY(updatedUser) references users(id)
 );
+
+ALTER TABLE work ADD COLUMN government_fee NUMERIC;
+ALTER TABLE visa ADD COLUMN government_fee NUMERIC;
+ALTER TABLE insurance ADD COLUMN company VARCHAR;

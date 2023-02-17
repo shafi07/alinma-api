@@ -12,7 +12,7 @@ FROM javasath WHERE name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 
 
 const GET_ALL_JAVASATH_STATUS = `SELECT id,sponser_name,name,id_number,purpose,iqama,insurance,other,agent,agent_amount,paid_date,professionName,newSponser,
 total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,to_char(createdTime,'DD/MM/YYYY') createdTime,fileId,status,amount_paid_dates,remarks
-FROM javasath WHERE status=$1`
+FROM javasath WHERE status=$1` 
 
 const GET_ALL_JAVASATH_STATUS_QUERY = `SELECT id,sponser_name,name,id_number,purpose,iqama,insurance,other,agent,agent_amount,paid_date,professionName,newSponser,
 total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,to_char(createdTime,'DD/MM/YYYY') createdTime,fileId,status,amount_paid_dates,remarks
@@ -34,6 +34,9 @@ const UPDATE_JAVASATH_AGENT_DETAILS = `UPDATE javasath SET agent = $2, agent_amo
 
 const DELETE_JAVASATH = `DELETE FROM javasath WHERE id = $1`
 
+const PATCH_JAVASATH = `UPDATE javasath SET agent = $2, agent_amount = $3, paid_date = $4, sponser_name = $5, name = $6, id_number = $7, purpose = $8, iqama = $9, insurance = $10,
+other = $11, total_amount = $12, paid_amount = $13, service = $14, mobileNumber = $15, mol = $16, sub_category = $17, remarks = $18, professionName = $19, newSponser = $20 WHERE id = $1`
+
 module.exports = {
     CREATE_NEW_JAVASATH,
     GET_ALL_JAVASATH,
@@ -42,6 +45,7 @@ module.exports = {
     GET_ALL_JAVASATH_STATUS_QUERY,
     DELETE_JAVASATH,
     UPDATE_JAVASATH,
+    PATCH_JAVASATH,
     UPDATE_JAVASATH_STATUS,
     GET_ALL_JAVASATH_CREDIT,
     GET_ALL_JAVASATH_QUERY_CREDIT,

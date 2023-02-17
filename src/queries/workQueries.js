@@ -34,11 +34,15 @@ const UPDATE_WORK_AGENT_DETAILS = `UPDATE work SET agent = $2, agent_amount = $3
 
 const DELETE_WORK = `DELETE FROM work WHERE id = $1`
 
+const PATCH_WORK = `UPDATE work SET agent = $2, agent_amount = $3, paid_date = $4, name = $5, id_number = $6, total_amount = $7, mobileNumber = $8,
+sub_category = $9, sponser_name = $10, service = $11, remarks = $12, government_fee = $13 WHERE id = $1`
+
 module.exports = {
     CREATE_NEW_WORK,
     GET_ALL_WORK,
     DELETE_WORK,
     UPDATE_WORK,
+    PATCH_WORK,
     GET_ALL_WORK_QUERY,
     GET_ALL_WORK_STATUS,
     GET_ALL_WORK_QUERY_STATUS,

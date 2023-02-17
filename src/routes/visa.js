@@ -8,5 +8,6 @@ router.post('/', visaController.createVisa);
 router.get('/', visaController.getAllVisa);
 router.delete('/:id', visaController.deleteVisa);
 router.put('/', visaController.updateVisa);
+router.patch('/',visaController.patchVisa);
 
 module.exports = router
