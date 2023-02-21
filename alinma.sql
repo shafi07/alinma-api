@@ -166,3 +166,15 @@ modifiedTime TIMESTAMP WITHOUT TIME ZONE,
 ALTER TABLE work ADD COLUMN government_fee NUMERIC;
 ALTER TABLE visa ADD COLUMN government_fee NUMERIC;
 ALTER TABLE insurance ADD COLUMN company VARCHAR;
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE INDEX javasath_name_gin_trgm_idx ON javasath USING gin (name gin_trgm_ops);
+CREATE INDEX javasath_mobileNumber_gin_trgm_idx ON javasath USING gin (mobileNumber gin_trgm_ops);
+CREATE INDEX insurance_name_gin_trgm_idx ON insurance USING gin (name gin_trgm_ops);
+CREATE INDEX insurance_mobileNumber_gin_trgm_idx ON insurance USING gin (mobileNumber gin_trgm_ops);
+CREATE INDEX work_name_gin_trgm_idx ON work USING gin (name gin_trgm_ops);
+CREATE INDEX work_mobileNumber_gin_trgm_idx ON work USING gin (mobileNumber gin_trgm_ops);
+CREATE INDEX other_name_gin_trgm_idx ON other USING gin (name gin_trgm_ops);
+CREATE INDEX other_mobileNumber_gin_trgm_idx ON other USING gin (mobileNumber gin_trgm_ops);
+CREATE INDEX visa_name_gin_trgm_idx ON visa USING gin (name gin_trgm_ops);
+CREATE INDEX visa_mobileNumber_gin_trgm_idx ON visa USING gin (mobileNumber gin_trgm_ops);

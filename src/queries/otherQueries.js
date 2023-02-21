@@ -4,7 +4,7 @@ const CREATE_NEW_OTHER = `INSERT INTO other (name,id_number,
 
 const GET_ALL_OTHER = `SELECT DISTINCT ON(createdTime) id,name,id_number,sponser_name,amount_paid_dates,createdTime,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
-    FROM other ORDER BY createdTime DESC LIMIT 100`
+    FROM other ORDER BY createdTime DESC LIMIT 50`
 
 const GET_ALL_OTHER_QUERY = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdTime,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks

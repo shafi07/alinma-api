@@ -4,7 +4,7 @@ const CREATE_NEW_INSURANCE = `INSERT INTO insurance (name,id_number,dob,
 
 const GET_ALL_INSURANCE = `SELECT DISTINCT ON(createdTime) id,name,id_number,dob,sponser_name,status,service,agent_amount,paid_date,remarks,amount_paid_dates,createdTime,company,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,count(*) OVER() AS full_count
-    FROM insurance ORDER BY createdTime DESC LIMIT 100`
+    FROM insurance ORDER BY createdTime DESC LIMIT 50`
 
 const GET_ALL_INSURANCE_QUERY = `SELECT id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdTime,company,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,service,agent_amount,paid_date,remarks,amount_paid_dates

@@ -4,7 +4,7 @@ const CREATE_NEW_WORK = `INSERT INTO work (name,id_number,
 
 const GET_ALL_WORK = `SELECT DISTINCT ON(createdTime) id,name,id_number,sponser_name,amount_paid_dates,createdTime,government_fee,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
-    FROM work ORDER BY createdTime DESC LIMIT 100`
+    FROM work ORDER BY createdTime DESC LIMIT 50`
 
 const GET_ALL_WORK_QUERY = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdTime,government_fee,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
