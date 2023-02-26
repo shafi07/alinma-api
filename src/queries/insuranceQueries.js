@@ -28,7 +28,9 @@ const GET_ALL_INSURANCE_CREDIT_QUERY = `SELECT id,name,id_number,dob,sponser_nam
 
 const UPDATE_INSURANCE = `UPDATE insurance SET modifiedTime = current_timestamp, paid_amount = (paid_amount + $2), amount_paid_dates = amount_paid_dates || $3::jsonb WHERE id = $1`
 
-const UPDATE_INSURANCE_STATUS = `UPDATE insurance SET modifiedTime = current_timestamp, status = $2 WHERE id = $1`
+const UPDATE_INSURANCE_STATUS = `UPDATE insurance SET modifiedTime = current_timestamp, status = $2,
+remarks = CASE WHEN $2::VARCHAR = 'returned' THEN (remarks || '--Returned On--' || $3) ELSE remarks END 
+WHERE id = $1`
 
 const UPDATE_INSURANCE_AGENT_DETAILS = `UPDATE insurance SET agent = $2, agent_amount = $3, paid_date = $4 WHERE id = $1`
 

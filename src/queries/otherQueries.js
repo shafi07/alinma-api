@@ -28,7 +28,9 @@ const GET_ALL_OTHER_CREDIT_QUERY = `SELECT id,name,id_number,sponser_name,amount
 
 const UPDATE_OTHER = `UPDATE other SET modifiedTime = current_timestamp, paid_amount = (paid_amount + $2), amount_paid_dates = amount_paid_dates || $3::jsonb WHERE id = $1`
 
-const UPDATE_OTHER_STATUS = `UPDATE other SET modifiedTime = current_timestamp, status = $2 WHERE id = $1`
+const UPDATE_OTHER_STATUS = `UPDATE other SET modifiedTime = current_timestamp, status = $2,
+remarks = CASE WHEN $2::VARCHAR = 'returned' THEN (remarks || '--Returned On--' || $3) ELSE remarks END 
+WHERE id = $1`
 
 const UPDATE_OTHER_AGENT_DETAILS = `UPDATE other SET agent = $2, agent_amount = $3, paid_date = $4 WHERE id = $1`
 

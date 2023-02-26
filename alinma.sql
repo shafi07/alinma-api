@@ -178,3 +178,9 @@ CREATE INDEX other_name_gin_trgm_idx ON other USING gin (name gin_trgm_ops);
 CREATE INDEX other_mobileNumber_gin_trgm_idx ON other USING gin (mobileNumber gin_trgm_ops);
 CREATE INDEX visa_name_gin_trgm_idx ON visa USING gin (name gin_trgm_ops);
 CREATE INDEX visa_mobileNumber_gin_trgm_idx ON visa USING gin (mobileNumber gin_trgm_ops);
+
+CREATE INDEX visa_createdTime_btree_idx ON visa (createdTime DESC);
+CREATE INDEX insurance_createdTime_btree_idx ON insurance (createdTime DESC);
+CREATE INDEX work_createdTime_btree_idx ON work (createdTime DESC);
+CREATE INDEX other_createdTime_btree_idx ON other (createdTime DESC);
+CREATE INDEX javasath_createdTime_btree_idx ON javasath (createdTime DESC);
