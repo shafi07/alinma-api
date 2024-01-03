@@ -166,6 +166,7 @@ modifiedTime TIMESTAMP WITHOUT TIME ZONE,
 ALTER TABLE work ADD COLUMN government_fee NUMERIC;
 ALTER TABLE visa ADD COLUMN government_fee NUMERIC;
 ALTER TABLE insurance ADD COLUMN company VARCHAR;
+ALTER TABLE javasath ADD COLUMN due VARCHAR;
 
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 CREATE INDEX javasath_name_gin_trgm_idx ON javasath USING gin (name gin_trgm_ops);
