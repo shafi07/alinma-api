@@ -184,3 +184,4 @@ CREATE INDEX insurance_createdTime_btree_idx ON insurance (createdTime DESC);
 CREATE INDEX work_createdTime_btree_idx ON work (createdTime DESC);
 CREATE INDEX other_createdTime_btree_idx ON other (createdTime DESC);
 CREATE INDEX javasath_createdTime_btree_idx ON javasath (createdTime DESC);
+CREATE INDEX idxgin ON javasath USING GIN (amount_paid_dates);
