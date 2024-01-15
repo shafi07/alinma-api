@@ -168,6 +168,12 @@ ALTER TABLE visa ADD COLUMN government_fee NUMERIC;
 ALTER TABLE insurance ADD COLUMN company VARCHAR;
 ALTER TABLE javasath ADD COLUMN due VARCHAR;
 
+ALTER TABLE javasath ADD COLUMN government_fee NUMERIC;
+ALTER TABLE javasath ADD COLUMN absheer_amount NUMERIC;
+ALTER TABLE javasath ADD COLUMN qiwa_amount NUMERIC;
+ALTER TABLE javasath ADD COLUMN new_passport_number VARCHAR;
+ALTER TABLE javasath ADD COLUMN expiry_date VARCHAR;
+
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 CREATE INDEX javasath_name_gin_trgm_idx ON javasath USING gin (name gin_trgm_ops);
 CREATE INDEX javasath_mobileNumber_gin_trgm_idx ON javasath USING gin (mobileNumber gin_trgm_ops);
@@ -186,3 +192,8 @@ CREATE INDEX work_createdTime_btree_idx ON work (createdTime DESC);
 CREATE INDEX other_createdTime_btree_idx ON other (createdTime DESC);
 CREATE INDEX javasath_createdTime_btree_idx ON javasath (createdTime DESC);
 CREATE INDEX idxgin ON javasath USING GIN (amount_paid_dates);
+CREATE INDEX javasath_id_number_gin_trgm_idx ON javasath USING gin (id_number gin_trgm_ops);
+CREATE INDEX insurance_id_number_gin_trgm_idx ON insurance USING gin (id_number gin_trgm_ops);
+CREATE INDEX work_id_number_gin_trgm_idx ON work USING gin (id_number gin_trgm_ops);
+CREATE INDEX other_id_number_gin_trgm_idx ON other USING gin (id_number gin_trgm_ops);
+CREATE INDEX visa_id_number_gin_trgm_idx ON visa USING gin (id_number gin_trgm_ops);
