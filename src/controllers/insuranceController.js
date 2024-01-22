@@ -92,8 +92,8 @@ module.exports = {
             const { id, agent_amount, agent, paid_date, name, id_number, dob, total_amount, mobileNumber, sub_category,
                 sponser_name, service, remarks,company,cr_number } = req.body
 
-            await commonQuery.exexuteQuery(insurance.PATCH_INSURANCE, [id, agent, agent_amount, paid_date, name, id_number, dob, total_amount, mobileNumber, sub_category,cr_number,
-                sponser_name, service, remarks,company])
+            await commonQuery.exexuteQuery(insurance.PATCH_INSURANCE, [id, agent, agent_amount, paid_date, name, id_number, dob, total_amount, mobileNumber, sub_category,
+                sponser_name, service, remarks,company,cr_number])
             return res.status(200).json({
                 message: "Insurance Data Updated successfully",
             });
