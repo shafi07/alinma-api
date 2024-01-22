@@ -90,9 +90,9 @@ module.exports = {
     async patchInsurance(req, res) {
         try {
             const { id, agent_amount, agent, paid_date, name, id_number, dob, total_amount, mobileNumber, sub_category,
-                sponser_name, service, remarks,company } = req.body
+                sponser_name, service, remarks,company,cr_number } = req.body
 
-            await commonQuery.exexuteQuery(insurance.PATCH_INSURANCE, [id, agent, agent_amount, paid_date, name, id_number, dob, total_amount, mobileNumber, sub_category,
+            await commonQuery.exexuteQuery(insurance.PATCH_INSURANCE, [id, agent, agent_amount, paid_date, name, id_number, dob, total_amount, mobileNumber, sub_category,cr_number,
                 sponser_name, service, remarks,company])
             return res.status(200).json({
                 message: "Insurance Data Updated successfully",
@@ -109,10 +109,10 @@ async function newInsurance(data) {
     try {
         const { name, id_number, dob, total_amount,
             paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, 
-            sponser_name, service, agent_amount, paid_date, remarks,company } = data
+            sponser_name, service, agent_amount, paid_date, remarks,company,cr_number } = data
         let date = moment().format("DD-MM-YYYY")
         await commonQuery.exexuteQuery(insurance.CREATE_NEW_INSURANCE, [name, id_number, dob, total_amount,
-            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name, service, agent_amount, paid_date, remarks, (`{"amount":"${paid_amount}","date":"${date}"}`),company])
+            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name, service, agent_amount, paid_date, remarks, (`{"amount":"${paid_amount}","date":"${date}"}`),company,cr_number])
         return true
     } catch (error) {
         console.log(error)

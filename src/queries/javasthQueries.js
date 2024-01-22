@@ -12,7 +12,7 @@ FROM javasath WHERE name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 
 
 const GET_ALL_JAVASATH_STATUS = `SELECT id,sponser_name,name,id_number,purpose,iqama,insurance,other,agent,agent_amount,paid_date,professionName,newSponser,
 total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,to_char(createdTime,'DD/MM/YYYY') createdTime,fileId,status,amount_paid_dates,remarks,due,absheer_amount,qiwa_amount,government_fee,new_passport_number,expiry_date
-FROM javasath WHERE status=$1` 
+FROM javasath WHERE status=$1`
 
 const GET_ALL_JAVASATH_STATUS_QUERY = `SELECT id,sponser_name,name,id_number,purpose,iqama,insurance,other,agent,agent_amount,paid_date,professionName,newSponser,
 total_amount,paid_amount,service,mobileNumber,mol,sub_category,balance_amount,to_char(createdTime,'DD/MM/YYYY') createdTime,fileId,status,amount_paid_dates,remarks,due,absheer_amount,qiwa_amount,government_fee,new_passport_number,expiry_date
