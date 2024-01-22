@@ -5,10 +5,17 @@ const moment = require('moment')
 module.exports = {
     async createWork(req, res) {
         try {
-            await newWork(req.body)
-            return res.status(200).json({
-                message: "work created successfully",
-            });
+            const newWork = await newWork(req.body)
+            if (newWork) {
+                return res.status(200).json({
+                    message: "work created successfully",
+                });
+            }
+            else {
+                return res.status(400).json({
+                    message: "Error in Create work",
+                });
+            }
         } catch (error) {
             console.log(error)
             return res.status(500).json({ message: "internel server error" });
@@ -63,21 +70,21 @@ module.exports = {
 
     async updateWork(req, res) {
         try {
-            const { id, paid_amount,status,agent_amount,agent,paid_date,updatedTime } = req.body
+            const { id, paid_amount, status, agent_amount, agent, paid_date, updatedTime } = req.body
             if (status) {
-                await commonQuery.exexuteQuery(work.UPDATE_WORK_STATUS, [id, status,updatedTime])
+                await commonQuery.exexuteQuery(work.UPDATE_WORK_STATUS, [id, status, updatedTime])
                 return res.status(200).json({
                     message: "Work Status Updated successfully",
                 });
             }
-            if(agent_amount){
+            if (agent_amount) {
                 await commonQuery.exexuteQuery(work.UPDATE_WORK_AGENT_DETAILS, [id, agent, agent_amount, paid_date])
                 return res.status(200).json({
                     message: "Work Agent Details Updated successfully",
                 });
             }
             let date = moment().format("DD-MM-YYYY")
-            await commonQuery.exexuteQuery(work.UPDATE_WORK, [id, paid_amount,(`{"amount":"${paid_amount}","date":"${date}"}`)])
+            await commonQuery.exexuteQuery(work.UPDATE_WORK, [id, paid_amount, (`{"amount":"${paid_amount}","date":"${date}"}`)])
             return res.status(200).json({
                 message: "Work Updated successfully",
             });
@@ -91,7 +98,7 @@ module.exports = {
         try {
             const { id, agent_amount, agent, paid_date, name, id_number,
                 total_amount, mobileNumber, sub_category, sponser_name, service, remarks, government_fee } = req.body
-            await commonQuery.exexuteQuery(work.PATCH_WORK,[id, agent, agent_amount, paid_date, name, id_number, total_amount, mobileNumber, sub_category, sponser_name, service, remarks, government_fee])
+            await commonQuery.exexuteQuery(work.PATCH_WORK, [id, agent, agent_amount, paid_date, name, id_number, total_amount, mobileNumber, sub_category, sponser_name, service, remarks, government_fee])
             return res.status(200).json({
                 message: "Work Data Updated successfully",
             });
@@ -105,12 +112,13 @@ module.exports = {
 async function newWork(data) {
     try {
         const { name, id_number, total_amount,
-        paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name,agent_amount,service,paid_date,remarks,government_fee } = data
+            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name, agent_amount, service, paid_date, remarks, government_fee } = data
         let date = moment().format("DD-MM-YYYY")
         await commonQuery.exexuteQuery(work.CREATE_NEW_WORK, [name, id_number, total_amount,
-            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name,agent_amount,service,paid_date,remarks,(`{"amount":"${paid_amount}","date":"${date}"}`),government_fee,])
+            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name, agent_amount, service, paid_date, remarks, (`{"amount":"${paid_amount}","date":"${date}"}`), government_fee,])
         return true
     } catch (error) {
         console.log(error)
+        return false
     }
 }
