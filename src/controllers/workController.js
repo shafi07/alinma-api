@@ -5,8 +5,8 @@ const moment = require('moment')
 module.exports = {
     async createWork(req, res) {
         try {
-            const newWork = await newWork(req.body)
-            if (newWork) {
+            const workNew = await newWork(req.body)
+            if (workNew) {
                 return res.status(200).json({
                     message: "work created successfully",
                 });

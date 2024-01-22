@@ -2,7 +2,7 @@ const CREATE_NEW_INSURANCE = `INSERT INTO insurance (name,id_number,dob,
     total_amount,paid_amount,agent,mobileNumber,createdUser,updatedUser,sub_category,sponser_name,service,agent_amount,paid_date,remarks,amount_paid_dates,company,cr_number) 
     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,ARRAY[$16]::json[],$17,$18)`
 
-const GET_ALL_INSURANCE = `SELECT DISTINCT ON(createdTime) id,name,id_number,dob,sponser_name,status,service,agent_amount,paid_date,remarks,amount_paid_dates,createdTime,company,cr_number,
+const GET_ALL_INSURANCE = `SELECT DISTINCT ON(createdTime) id,name,id_number,dob,sponser_name,status,service,agent_amount,paid_date,remarks,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdTime,company,cr_number,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId
     FROM insurance ORDER BY createdTime DESC LIMIT 50`
 
