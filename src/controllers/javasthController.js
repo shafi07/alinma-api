@@ -90,9 +90,9 @@ module.exports = {
     async patchJavasath(req, res) {
         try {
             const { id, agent_amount, agent, paid_date, sponser_name, name, id_number, purpose, iqama, insurance,absheer_amount,qiwa_amount,government_fee,new_passport_number,expiry_date,
-                other, total_amount, paid_amount, service, mobileNumber, mol, sub_category, remarks, professionName, newSponser, due,re_entry_type } = req.body
+                other, total_amount, paid_amount, service, mobileNumber, mol, sub_category, remarks, professionName, newSponser, due,re_entry_type,boarder_number } = req.body
             commonQuery.exexuteQuery(javsath.PATCH_JAVASATH, [id, agent, agent_amount, paid_date, sponser_name, name, id_number, purpose, iqama, insurance,
-                other, total_amount, paid_amount, service, mobileNumber, mol, sub_category, remarks, professionName, newSponser, due,absheer_amount,qiwa_amount,government_fee,new_passport_number,expiry_date,re_entry_type])
+                other, total_amount, paid_amount, service, mobileNumber, mol, sub_category, remarks, professionName, newSponser, due,absheer_amount,qiwa_amount,government_fee,new_passport_number,expiry_date,re_entry_type,boarder_number])
             return res.status(200).json({
                 message: "Javasath Data Updated successfully",
             });
@@ -106,11 +106,11 @@ module.exports = {
 async function newJavasath(data) { 
     try {
         const { sponser_name, name, id_number, purpose, iqama, insurance, other, total_amount,absheer_amount,qiwa_amount,government_fee,new_passport_number,expiry_date,
-            paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category, remarks, agent, agent_amount, paid_date, professionName, newSponser,due,re_entry_type } = data
+            paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category, remarks, agent, agent_amount, paid_date, professionName, newSponser,due,re_entry_type,boarder_number } = data
         let date = moment().format("DD-MM-YYYY")
         let javasath = await commonQuery.exexuteQuery(javsath.CREATE_NEW_JAVASATH, [sponser_name, name, id_number, purpose, iqama, insurance, other, total_amount,
             paid_amount, service, mobileNumber, createdUser, updatedUser, mol, sub_category, remarks, (`{"amount":"${paid_amount}","date":"${date}"}`), agent, agent_amount, paid_date, professionName, newSponser, due,
-            absheer_amount,qiwa_amount,government_fee,new_passport_number,expiry_date,re_entry_type ])
+            absheer_amount,qiwa_amount,government_fee,new_passport_number,expiry_date,re_entry_type,boarder_number ])
         return true
     } catch (error) {
         console.log(error)
