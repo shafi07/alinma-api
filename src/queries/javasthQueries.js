@@ -37,7 +37,7 @@ const UPDATE_JAVASATH_AGENT_DETAILS = `UPDATE javasath SET agent = $2, agent_amo
 const DELETE_JAVASATH = `DELETE FROM javasath WHERE id = $1`
 
 const PATCH_JAVASATH = `UPDATE javasath SET agent = $2, agent_amount = $3, paid_date = $4, sponser_name = $5, name = $6, id_number = $7, purpose = $8, iqama = $9, insurance = $10,
-other = $11, total_amount = $12, paid_amount = $13, service = $14, mobileNumber = $15, mol = $16, sub_category = $17, remarks = $18, professionName = $19, newSponser = $20, due = $21,absheer_amount=$22,qiwa_amount=$23,government_fee=$24,new_passport_number=$25,expiry_date=$26,re_entry_type=$27 WHERE id = $1`
+other = $11, total_amount = $12, paid_amount = $13, service = $14, mobileNumber = $15, mol = $16, sub_category = $17, remarks = $18, professionName = $19, newSponser = $20, due = $21,absheer_amount=$22,qiwa_amount=$23,government_fee=$24,new_passport_number=$25,expiry_date=$26,re_entry_type=$27,boarder_number =$28 WHERE id = $1`
 
 module.exports = {
     CREATE_NEW_JAVASATH,
