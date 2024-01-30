@@ -90,8 +90,8 @@ module.exports = {
     async patchOther(req, res) {
         try {
             const { id, agent_amount, agent, paid_date, name, id_number, total_amount, mobileNumber, sub_category,
-                sponser_name, service, remarks } = req.body
-            await commonQuery.exexuteQuery(other.PATCH_OTHER, [id, agent, agent_amount, paid_date, name, id_number, total_amount, mobileNumber, sub_category, sponser_name, service, remarks])
+                sponser_name, service, remarks,paid_amount } = req.body
+            await Promise.all([commonQuery.exexuteQuery(other.PATCH_OTHER, [id, agent, agent_amount, paid_date, name, id_number, total_amount, mobileNumber, sub_category, sponser_name, service, remarks]),updatePayment(id,paid_amount)])
             return res.status(200).json({
                 message: "Other Data Updated successfully",
             });
@@ -111,6 +111,20 @@ async function newOther(data) {
             paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,(`{"amount":"${paid_amount}","date":"${date}"}`)])
         return true
     } catch (error) {
+        console.log(error)
+    }
+}
+
+async function updatePayment (id,paid_amount) {
+    try {
+        let date = moment().format("DD-MM-YYYY")
+        if (paid_amount != 0){
+        return await commonQuery.exexuteQuery(other.UPDATE_OTHER, [id, paid_amount,(`{"amount":"${paid_amount}","date":"${date}"}`)])
+        }else{
+            return true
+        }     
+    } catch (error) {
+        return false
         console.log(error)
     }
 }

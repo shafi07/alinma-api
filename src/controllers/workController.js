@@ -97,8 +97,8 @@ module.exports = {
     async patchWork(req, res) {
         try {
             const { id, agent_amount, agent, paid_date, name, id_number,
-                total_amount, mobileNumber, sub_category, sponser_name, service, remarks, government_fee } = req.body
-            await commonQuery.exexuteQuery(work.PATCH_WORK, [id, agent, agent_amount, paid_date, name, id_number, total_amount, mobileNumber, sub_category, sponser_name, service, remarks, government_fee])
+                total_amount, mobileNumber, sub_category, sponser_name, service, remarks, government_fee,paid_amount } = req.body
+            await Promise.all([commonQuery.exexuteQuery(work.PATCH_WORK, [id, agent, agent_amount, paid_date, name, id_number, total_amount, mobileNumber, sub_category, sponser_name, service, remarks, government_fee]),updatePayment(id,paid_amount)])
             return res.status(200).json({
                 message: "Work Data Updated successfully",
             });
@@ -120,5 +120,19 @@ async function newWork(data) {
     } catch (error) {
         console.log(error)
         return false
+    }
+}
+
+async function updatePayment (id,paid_amount) {
+    try {
+        let date = moment().format("DD-MM-YYYY")
+        if (paid_amount != 0){
+        return await commonQuery.exexuteQuery(work.UPDATE_WORK, [id, paid_amount,(`{"amount":"${paid_amount}","date":"${date}"}`)])
+        }else{
+            return true
+        }     
+    } catch (error) {
+        return false
+        console.log(error)
     }
 }

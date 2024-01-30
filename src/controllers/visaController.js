@@ -90,9 +90,9 @@ module.exports = {
     async patchVisa(req, res) {
         try {
             const { id, name, id_number, total_amount, mobileNumber, sub_category, sponser_name,
-                service, remarks, visa_number, chamber_amount, government_fee,agent_amount,agent,paid_date } = req.body
-            await commonQuery.exexuteQuery(visa.PATCH_VISA, [id, name, id_number, total_amount, mobileNumber, sub_category, sponser_name,
-                service, remarks, visa_number, chamber_amount, government_fee,agent_amount,agent,paid_date]);
+                service, remarks, visa_number, chamber_amount, government_fee,agent_amount,agent,paid_date,paid_amount } = req.body
+            await Promise.all([commonQuery.exexuteQuery(visa.PATCH_VISA, [id, name, id_number, total_amount, mobileNumber, sub_category, sponser_name,
+                service, remarks, visa_number, chamber_amount, government_fee,agent_amount,agent,paid_date])],updatePayment(id,paid_amount))
             return res.status(200).json({
                 message: "Visa Data Updated successfully",
             });
@@ -112,6 +112,20 @@ async function newVisa(data) {
             paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,visa_number,(`{"amount":"${paid_amount}","date":"${date}"}`),chamber_amount,government_fee])
         return true
     } catch (error) {
+        console.log(error)
+    }
+}
+
+async function updatePayment (id,paid_amount) {
+    try {
+        let date = moment().format("DD-MM-YYYY")
+        if (paid_amount != 0){
+        return await commonQuery.exexuteQuery(visa.UPDATE_VISA, [id, paid_amount,(`{"amount":"${paid_amount}","date":"${date}"}`)])
+        }else{
+            return true
+        }     
+    } catch (error) {
+        return false
         console.log(error)
     }
 }

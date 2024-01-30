@@ -91,8 +91,9 @@ module.exports = {
         try {
             const { id, agent_amount, agent, paid_date, sponser_name, name, id_number, purpose, iqama, insurance,absheer_amount,qiwa_amount,government_fee,new_passport_number,expiry_date,
                 other, total_amount, paid_amount, service, mobileNumber, mol, sub_category, remarks, professionName, newSponser, due,re_entry_type,boarder_number } = req.body
-            commonQuery.exexuteQuery(javsath.PATCH_JAVASATH, [id, agent, agent_amount, paid_date, sponser_name, name, id_number, purpose, iqama, insurance,
-                other, total_amount, paid_amount, service, mobileNumber, mol, sub_category, remarks, professionName, newSponser, due,absheer_amount,qiwa_amount,government_fee,new_passport_number,expiry_date,re_entry_type,boarder_number])
+            await Promise.all([commonQuery.exexuteQuery(javsath.PATCH_JAVASATH, [id, agent, agent_amount, paid_date, sponser_name, name, id_number, purpose, iqama, insurance,
+                other, total_amount, service, mobileNumber, mol, sub_category, remarks, professionName, newSponser, due,absheer_amount,qiwa_amount,government_fee,new_passport_number,expiry_date,re_entry_type,boarder_number]),updatePayment(id,paid_amount)])
+            
             return res.status(200).json({
                 message: "Javasath Data Updated successfully",
             });
@@ -115,5 +116,19 @@ async function newJavasath(data) {
     } catch (error) {
         console.log(error)
         throw error
+    }
+}
+
+async function updatePayment (id,paid_amount) {
+    try {
+        let date = moment().format("DD-MM-YYYY")
+        if (paid_amount != 0){
+        return await commonQuery.exexuteQuery(javsath.UPDATE_JAVASATH, [id, paid_amount,(`{"amount":"${paid_amount}","date":"${date}"}`)])
+        }else{
+            return true
+        }     
+    } catch (error) {
+        return false
+        console.log(error)
     }
 }
