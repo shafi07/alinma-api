@@ -6,23 +6,23 @@ const GET_ALL_WORK = `SELECT DISTINCT ON(createdTime) id,name,id_number,sponser_
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
     FROM work ORDER BY createdTime DESC LIMIT 50`
 
-const GET_ALL_WORK_QUERY = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdTime,government_fee,
+const GET_ALL_WORK_QUERY = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
     FROM work WHERE name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%'  LIMIT 100`
 
-const GET_ALL_WORK_STATUS = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdTime,government_fee,
+const GET_ALL_WORK_STATUS = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
     FROM work WHERE status = $1  LIMIT 100`
 
-const GET_ALL_WORK_QUERY_STATUS = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdTime,government_fee,
+const GET_ALL_WORK_QUERY_STATUS = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
     FROM work WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
 
-const GET_ALL_WORK_CREDIT = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdTime,government_fee,
+const GET_ALL_WORK_CREDIT = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
     FROM work WHERE balance_amount != '0'  LIMIT 100`
 
-const GET_ALL_WORK_CREDIT_QUERY = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdTime,government_fee,
+const GET_ALL_WORK_CREDIT_QUERY = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
     FROM work WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%') AND balance_amount != '0'  LIMIT 100`
 

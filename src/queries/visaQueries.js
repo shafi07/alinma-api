@@ -6,23 +6,23 @@ const GET_ALL_VISA = `SELECT DISTINCT ON(createdTime) id,name,id_number,sponser_
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
     FROM visa ORDER BY createdTime DESC LIMIT 50`
 
-const GET_ALL_VISA_QUERY = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdTime,government_fee,
+const GET_ALL_VISA_QUERY = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
     FROM visa WHERE name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%'  LIMIT 100`
 
-const GET_ALL_VISA_STATUS = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdTime,government_fee,
+const GET_ALL_VISA_STATUS = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
     FROM visa WHERE status = $1 LIMIT 100`
 
-const GET_ALL_VISA_QUERY_STATUS = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdTime,government_fee,
+const GET_ALL_VISA_QUERY_STATUS = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
     FROM visa WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
 
-const GET_ALL_VISA_CREDIT = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdTime,government_fee,
+const GET_ALL_VISA_CREDIT = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
     FROM visa WHERE balance_amount != '0' LIMIT 100`
 
-const GET_ALL_VISA_QUERY_CREDIT = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdTime,government_fee,
+const GET_ALL_VISA_QUERY_CREDIT = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
     FROM visa WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%') AND balance_amount != '0'  LIMIT 100`
 

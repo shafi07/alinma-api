@@ -6,23 +6,23 @@ const GET_ALL_INSURANCE = `SELECT DISTINCT ON(createdTime) id,name,id_number,dob
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId
     FROM insurance ORDER BY createdTime DESC LIMIT 50`
 
-const GET_ALL_INSURANCE_QUERY = `SELECT id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdTime,company,cr_number,
+const GET_ALL_INSURANCE_QUERY = `SELECT id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdDate,company,cr_number,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,service,agent_amount,paid_date,remarks,amount_paid_dates
     FROM insurance WHERE name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' LIMIT 100`
 
-const GET_ALL_INSURANCE_STATUS = `SELECT id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdTime,company,cr_number,
+const GET_ALL_INSURANCE_STATUS = `SELECT id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdDate,company,cr_number,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,service,agent_amount,paid_date,remarks,amount_paid_dates
     FROM insurance WHERE status = $1  LIMIT 100`
 
-const GET_ALL_INSURANCE_QUERY_STATUS = `SELECT id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdTime,company,cr_number,
+const GET_ALL_INSURANCE_QUERY_STATUS = `SELECT id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdDate,company,cr_number,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,service,agent_amount,paid_date,remarks,amount_paid_dates
     FROM insurance WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
 
-const GET_ALL_INSURANCE_CRRDIT = `SELECT id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdTime,company,cr_number,
+const GET_ALL_INSURANCE_CRRDIT = `SELECT id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdDate,company,cr_number,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,service,agent_amount,paid_date,remarks,amount_paid_dates
     FROM insurance WHERE balance_amount != '0'  LIMIT 100`
 
-const GET_ALL_INSURANCE_CREDIT_QUERY = `SELECT id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdTime,company,cr_number,
+const GET_ALL_INSURANCE_CREDIT_QUERY = `SELECT id,name,id_number,dob,sponser_name,to_char(createdTime,'DD/MM/YYYY') createdDate,company,cr_number,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,service,agent_amount,paid_date,remarks,amount_paid_dates
     FROM insurance WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%') AND balance_amount != '0'  LIMIT 100`
 
