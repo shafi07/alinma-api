@@ -96,9 +96,9 @@ module.exports = {
 
     async patchWork(req, res) {
         try {
-            const { id, agent_amount, agent, paid_date, name, id_number,
+            const { id, agent_amount, agent, paid_date, name, id_number,work_type,
                 total_amount, mobileNumber, sub_category, sponser_name, service, remarks, government_fee,paid_amount } = req.body
-            await Promise.all([commonQuery.exexuteQuery(work.PATCH_WORK, [id, agent, agent_amount, paid_date, name, id_number, total_amount, mobileNumber, sub_category, sponser_name, service, remarks, government_fee]),updatePayment(id,paid_amount)])
+            await Promise.all([commonQuery.exexuteQuery(work.PATCH_WORK, [id, agent, agent_amount, paid_date, name, id_number, total_amount, mobileNumber, sub_category, sponser_name, service, remarks, government_fee,work_type]),updatePayment(id,paid_amount)])
             return res.status(200).json({
                 message: "Work Data Updated successfully",
             });
@@ -111,11 +111,11 @@ module.exports = {
 
 async function newWork(data) {
     try {
-        const { name, id_number, total_amount,
+        const { name, id_number, total_amount,work_type,
             paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name, agent_amount, service, paid_date, remarks, government_fee } = data
         let date = moment().format("DD-MM-YYYY")
         await commonQuery.exexuteQuery(work.CREATE_NEW_WORK, [name, id_number, total_amount,
-            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name, agent_amount, service, paid_date, remarks, (`{"amount":"${paid_amount}","date":"${date}"}`), government_fee,])
+            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name, agent_amount, service, paid_date, remarks, (`{"amount":"${paid_amount}","date":"${date}"}`), government_fee,work_type])
         return true
     } catch (error) {
         console.log(error)

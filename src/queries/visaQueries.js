@@ -10,6 +10,10 @@ const GET_ALL_VISA_QUERY = `SELECT id,name,id_number,sponser_name,visa_number,to
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
     FROM visa WHERE name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%'  LIMIT 100`
 
+// const GET_ALL_VISA_QUERY = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
+//     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
+//     FROM visa WHERE CONCAT(name,mobileNumber,id_number,fileId) ILIKE '%' || $1 || '%'  LIMIT 100`
+
 const GET_ALL_VISA_STATUS = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
     FROM visa WHERE status = $1 LIMIT 100`
