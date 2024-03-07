@@ -1,12 +1,12 @@
 const CREATE_NEW_VISA = `INSERT INTO visa (name,id_number,
-    total_amount,paid_amount,mobileNumber,createdUser,updatedUser,sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,visa_number,amount_paid_dates,chamber_amount,government_fee) 
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,ARRAY[$16]::json[],$17,$18)`
+    total_amount,paid_amount,mobileNumber,createdUser,updatedUser,sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,visa_number,amount_paid_dates,chamber_amount,government_fee,application_number,travels) 
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,ARRAY[$16]::json[],$17,$18,$19,$20)`
 
-const GET_ALL_VISA = `SELECT DISTINCT ON(createdTime) id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
+const GET_ALL_VISA = `SELECT DISTINCT ON(createdTime) id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,application_number,travels,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
     FROM visa ORDER BY createdTime DESC LIMIT 50`
 
-const GET_ALL_VISA_QUERY = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
+const GET_ALL_VISA_QUERY = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,application_number,travels,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
     FROM visa WHERE name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%'  LIMIT 100`
 
@@ -14,19 +14,19 @@ const GET_ALL_VISA_QUERY = `SELECT id,name,id_number,sponser_name,visa_number,to
 //     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
 //     FROM visa WHERE CONCAT(name,mobileNumber,id_number,fileId) ILIKE '%' || $1 || '%'  LIMIT 100`
 
-const GET_ALL_VISA_STATUS = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
+const GET_ALL_VISA_STATUS = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,application_number,travels,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
     FROM visa WHERE status = $1 LIMIT 100`
 
-const GET_ALL_VISA_QUERY_STATUS = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
+const GET_ALL_VISA_QUERY_STATUS = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,application_number,travels,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
     FROM visa WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
 
-const GET_ALL_VISA_CREDIT = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
+const GET_ALL_VISA_CREDIT = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,application_number,travels,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
     FROM visa WHERE balance_amount != '0' LIMIT 100`
 
-const GET_ALL_VISA_QUERY_CREDIT = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
+const GET_ALL_VISA_QUERY_CREDIT = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,application_number,travels,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
     FROM visa WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%') AND balance_amount != '0'  LIMIT 100`
 
@@ -42,7 +42,7 @@ const UPDATE_VISA_AGENT_DETAILS = `UPDATE visa SET agent = $2, agent_amount = $3
 const DELETE_VISA = `DELETE FROM visa WHERE id = $1`
 
 const PATCH_VISA = `UPDATE visa SET modifiedTime = current_timestamp, name = $2, id_number = $3, total_amount = $4, mobileNumber = $5, 
-sub_category = $6, sponser_name = $7, service = $8, remarks = $9, visa_number = $10, chamber_amount = $11, government_fee = $12, agent_amount = $13, agent = $14, paid_date = $15 WHERE id = $1`
+sub_category = $6, sponser_name = $7, service = $8, remarks = $9, visa_number = $10, chamber_amount = $11, government_fee = $12, agent_amount = $13, agent = $14, paid_date = $15, application_number = $16, travels = $17 WHERE id = $1`
 
 module.exports = {
     CREATE_NEW_VISA,

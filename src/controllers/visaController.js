@@ -90,9 +90,9 @@ module.exports = {
     async patchVisa(req, res) {
         try {
             const { id, name, id_number, total_amount, mobileNumber, sub_category, sponser_name,
-                service, remarks, visa_number, chamber_amount, government_fee,agent_amount,agent,paid_date,paid_amount } = req.body
+                service, remarks, visa_number, chamber_amount, government_fee,agent_amount,agent,paid_date,paid_amount,application_number,travels } = req.body
             await Promise.all([commonQuery.exexuteQuery(visa.PATCH_VISA, [id, name, id_number, total_amount, mobileNumber, sub_category, sponser_name,
-                service, remarks, visa_number, chamber_amount, government_fee,agent_amount,agent,paid_date])],updatePayment(id,paid_amount))
+                service, remarks, visa_number, chamber_amount, government_fee,agent_amount,agent,paid_date,application_number,travels])],updatePayment(id,paid_amount))
             return res.status(200).json({
                 message: "Visa Data Updated successfully",
             });
@@ -106,10 +106,10 @@ module.exports = {
 async function newVisa(data) {
     try {
         const { name, id_number, total_amount,
-            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,visa_number,chamber_amount,government_fee } = data
+            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,visa_number,chamber_amount,government_fee,application_number,travels } = data
         let date = moment().format("DD-MM-YYYY")
         await commonQuery.exexuteQuery(visa.CREATE_NEW_VISA, [name, id_number, total_amount,
-            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,visa_number,(`{"amount":"${paid_amount}","date":"${date}"}`),chamber_amount,government_fee])
+            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,visa_number,(`{"amount":"${paid_amount}","date":"${date}"}`),chamber_amount,government_fee,application_number,travels])
         return true
     } catch (error) {
         console.log(error)
