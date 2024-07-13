@@ -4,27 +4,51 @@ const CREATE_NEW_OTHER = `INSERT INTO other (name,id_number,
 
 const GET_ALL_OTHER = `SELECT DISTINCT ON(createdTime) id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
-    FROM other ORDER BY createdTime DESC LIMIT 50`
+    FROM other WHERE sub_category != 'Renew Pasport' ORDER BY createdTime DESC LIMIT 50`
+
+const GET_ALL_OTHER_PASSPORT = `SELECT DISTINCT ON(createdTime) id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,
+    total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
+    FROM other WHERE sub_category = 'Renew Pasport' ORDER BY createdTime DESC LIMIT 50`
 
 const GET_ALL_OTHER_QUERY = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
-    FROM other WHERE name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%' LIMIT 100`
+    FROM other WHERE sub_category != 'Renew Pasport' AND name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%' LIMIT 100`
+
+const GET_ALL_OTHER_QUERY_PASSPORT = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,
+    total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
+    FROM other WHERE sub_category = 'Renew Pasport' AND name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%' LIMIT 100`
 
 const GET_ALL_OTHER_STATUS = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
-    FROM other WHERE status = $1 LIMIT 100`
+    FROM other WHERE sub_category != 'Renew Pasport' AND status = $1 LIMIT 100`
+
+const GET_ALL_OTHER_STATUS_PASSPORT = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,
+    total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
+    FROM other WHERE sub_category = 'Renew Pasport' AND status = $1 LIMIT 100`
 
 const GET_ALL_OTHER_QUERY_STATUS = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
-    FROM other WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
+    FROM other WHERE sub_category != 'Renew Pasport' AND (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
+
+const GET_ALL_OTHER_QUERY_STATUS_PASSPORT = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,
+    total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
+    FROM other WHERE sub_category = 'Renew Pasport' AND (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
 
 const GET_ALL_OTHER_CREDIT = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
-    FROM other WHERE balance_amount != '0' LIMIT 100`
+    FROM other WHERE sub_category != 'Renew Pasport' AND balance_amount != '0' LIMIT 100`
+
+const GET_ALL_OTHER_CREDIT_PASSPORT = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,
+    total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
+    FROM other WHERE sub_category = 'Renew Pasport' AND balance_amount != '0' LIMIT 100`
 
 const GET_ALL_OTHER_CREDIT_QUERY = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
-    FROM other WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%') AND balance_amount != '0' LIMIT 100`
+    FROM other WHERE sub_category != AND (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%') AND balance_amount != '0' LIMIT 100`
+
+const GET_ALL_OTHER_CREDIT_QUERY_PASSPORT = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,
+    total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks
+    FROM other WHERE sub_category = 'Renew Pasport' AND (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%') AND balance_amount != '0' LIMIT 100`
 
 const UPDATE_OTHER = `UPDATE other SET modifiedTime = current_timestamp, paid_amount = (paid_amount + $2), amount_paid_dates = amount_paid_dates || $3::jsonb WHERE id = $1`
 
@@ -50,5 +74,11 @@ module.exports = {
     UPDATE_OTHER_STATUS,
     GET_ALL_OTHER_CREDIT,
     GET_ALL_OTHER_CREDIT_QUERY,
-    UPDATE_OTHER_AGENT_DETAILS
+    UPDATE_OTHER_AGENT_DETAILS,
+    GET_ALL_OTHER_CREDIT_PASSPORT,
+    GET_ALL_OTHER_CREDIT_QUERY_PASSPORT,
+    GET_ALL_OTHER_QUERY_PASSPORT,
+    GET_ALL_OTHER_STATUS_PASSPORT,
+    GET_ALL_OTHER_QUERY_STATUS_PASSPORT,
+    GET_ALL_OTHER_PASSPORT
 }

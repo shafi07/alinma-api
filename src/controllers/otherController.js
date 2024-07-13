@@ -18,28 +18,35 @@ module.exports = {
     async getAllOthers(req, res) {
         try {
             let allOthers
-            let { pageNo = 0, query, status } = req.query;
+            let finalQuery = ``
+            let { pageNo = 0, query, status, type } = req.query;
             offset = pageNo * 10
             if (status && status == 'credit') {
                 if (status && !query) {
-                    allOthers = await commonQuery.exexuteQuery(other.GET_ALL_OTHER_CREDIT)
+                    finalQuery = type == `passport` ? other.GET_ALL_OTHER_CREDIT_PASSPORT : other.GET_ALL_OTHER_CREDIT
+                    allOthers = await commonQuery.exexuteQuery(finalQuery)
                 return res.send(allOthers.rows)
                 } else if (query && status) {
-                    allOthers = await commonQuery.exexuteQuery(other.GET_ALL_OTHER_CREDIT_QUERY, [query])
+                    finalQuery = type == `passport` ? other.GET_ALL_OTHER_CREDIT_QUERY_PASSPORT : other.GET_ALL_OTHER_CREDIT_QUERY
+                    allOthers = await commonQuery.exexuteQuery(finalQuery, [query])
                     return res.send(allOthers.rows)
                 }
             }
             if (query && !status) {
-                allOthers = await commonQuery.exexuteQuery(other.GET_ALL_OTHER_QUERY, [query])
+                finalQuery = type == `passport` ? other.GET_ALL_OTHER_QUERY_PASSPORT : other.GET_ALL_OTHER_QUERY
+                allOthers = await commonQuery.exexuteQuery(finalQuery, [query])
                 return res.send(allOthers.rows)
             } else if (status && !query) {
-                allOthers = await commonQuery.exexuteQuery(other.GET_ALL_OTHER_STATUS, [status])
+                finalQuery = type == `passport` ? other.GET_ALL_OTHER_STATUS_PASSPORT : other.GET_ALL_OTHER_STATUS
+                allOthers = await commonQuery.exexuteQuery(finalQuery, [status])
                 return res.send(allOthers.rows)
             } else if (query && status) {
-                allOthers = await commonQuery.exexuteQuery(other.GET_ALL_OTHER_QUERY_STATUS, [query, status])
+                finalQuery = type == `passport` ? other.GET_ALL_OTHER_QUERY_STATUS_PASSPORT : other.GET_ALL_OTHER_QUERY_STATUS
+                allOthers = await commonQuery.exexuteQuery(finalQuery, [query, status])
                 return res.send(allOthers.rows)
             }
-            allOthers = await commonQuery.exexuteQuery(other.GET_ALL_OTHER)
+            finalQuery = type == `passport` ? other.GET_ALL_OTHER_PASSPORT : other.GET_ALL_OTHER
+            allOthers = await commonQuery.exexuteQuery(finalQuery)
             return res.send(allOthers.rows)
         } catch (error) {
             console.log(error)
