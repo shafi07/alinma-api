@@ -47,9 +47,9 @@ module.exports = {
 
     async updateCustomer(req, res) {
         try {
-            const { id,name, mobileNumber, id_number, qiwa, absheer, absheer_mobileNumber, dob, expiry_date,email,
+            const { id,name, mobilenumber, id_number, qiwa, absheer, absheer_mobileNumber, dob, expiry_date,email,
                 pwd, mudad, sijil, gosi, mudeer, mumeez_pwd, salama, post, baladi, tameeni,musanad,remarks} = req.body
-            await commonQuery.exexuteQuery(customer.UPDATE_CUSTOMER, [id,name, mobileNumber, id_number, qiwa, absheer, absheer_mobileNumber, dob, expiry_date,email,
+            await commonQuery.exexuteQuery(customer.UPDATE_CUSTOMER, [id,name, mobilenumber, id_number, qiwa, absheer, absheer_mobileNumber, dob, expiry_date,email,
                 pwd, mudad, sijil, gosi, mudeer, mumeez_pwd, salama, post, baladi, tameeni,musanad,remarks])
             return res.status(200).json({
                 message: "Customer Updated successfully",
