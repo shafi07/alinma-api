@@ -42,7 +42,7 @@ const UPDATE_VISA_AGENT_DETAILS = `UPDATE visa SET agent = $2, agent_amount = $3
 const DELETE_VISA = `DELETE FROM visa WHERE id = $1`
 
 const PATCH_VISA = `UPDATE visa SET modifiedTime = current_timestamp, name = $2, id_number = $3, total_amount = $4, mobileNumber = $5, 
-sub_category = $6, sponser_name = $7, service = $8, remarks = $9, visa_number = $10, chamber_amount = $11, government_fee = $12, agent_amount = $13, agent = $14, paid_date = $15, application_number = $16, travels = $17 WHERE id = $1`
+sub_category = $6, sponser_name = $7, service = $8, remarks = $9, visa_number = $10, chamber_amount = $11, government_fee = $12, agent_amount = $13, agent = $14, paid_date = $15, application_number = $16, travels = $17, status = $18 WHERE id = $1`
 
 module.exports = {
     CREATE_NEW_VISA,

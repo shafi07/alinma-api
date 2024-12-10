@@ -97,8 +97,8 @@ module.exports = {
     async patchWork(req, res) {
         try {
             const { id, agent_amount, agent, paid_date, name, id_number,work_type,
-                total_amount, mobileNumber, sub_category, sponser_name, service, remarks, government_fee,paid_amount } = req.body
-            await Promise.all([commonQuery.exexuteQuery(work.PATCH_WORK, [id, agent, agent_amount, paid_date, name, id_number, total_amount, mobileNumber, sub_category, sponser_name, service, remarks, government_fee,work_type]),updatePayment(id,paid_amount)])
+                total_amount, mobilenumber, sub_category, sponser_name, service, remarks, government_fee,paid_amount,status } = req.body
+            await Promise.all([commonQuery.exexuteQuery(work.PATCH_WORK, [id, agent, agent_amount, paid_date, name, id_number, total_amount, mobilenumber, sub_category, sponser_name, service, remarks, government_fee,work_type,status]),updatePayment(id,paid_amount)])
             return res.status(200).json({
                 message: "Work Data Updated successfully",
             });
@@ -112,10 +112,10 @@ module.exports = {
 async function newWork(data) {
     try {
         const { name, id_number, total_amount,work_type,
-            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name, agent_amount, service, paid_date, remarks, government_fee } = data
+            paid_amount, agent, mobilenumber, createdUser, updatedUser, sub_category, sponser_name, agent_amount, service, paid_date, remarks, government_fee } = data
         let date = moment().format("DD-MM-YYYY")
         await commonQuery.exexuteQuery(work.CREATE_NEW_WORK, [name, id_number, total_amount,
-            paid_amount, agent, mobileNumber, createdUser, updatedUser, sub_category, sponser_name, agent_amount, service, paid_date, remarks, (`{"amount":"${paid_amount}","date":"${date}"}`), government_fee,work_type])
+            paid_amount, agent, mobilenumber, createdUser, updatedUser, sub_category, sponser_name, agent_amount, service, paid_date, remarks, (`{"amount":"${paid_amount}","date":"${date}"}`), government_fee,work_type])
         return true
     } catch (error) {
         console.log(error)

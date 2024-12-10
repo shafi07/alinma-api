@@ -95,10 +95,11 @@ module.exports = {
     },
 
     async patchOther(req, res) {
-        try {
-            const { id, agent_amount, agent, paid_date, name, id_number, total_amount, mobileNumber, sub_category,
-                sponser_name, service, remarks,paid_amount } = req.body
-            await Promise.all([commonQuery.exexuteQuery(other.PATCH_OTHER, [id, agent, agent_amount, paid_date, name, id_number, total_amount, mobileNumber, sub_category, sponser_name, service, remarks]),updatePayment(id,paid_amount)])
+        try { 
+            console.log('>><<<<',req.body)
+            const { id, agent_amount, agent, paid_date, name, id_number, total_amount, mobilenumber, sub_category,
+                sponser_name, service, remarks,paid_amount,status } = req.body
+            await Promise.all([commonQuery.exexuteQuery(other.PATCH_OTHER, [id, agent, agent_amount, paid_date, name, id_number, total_amount, mobilenumber, sub_category, sponser_name, service, remarks,status]),updatePayment(id,paid_amount)])
             return res.status(200).json({
                 message: "Other Data Updated successfully",
             });
@@ -111,11 +112,11 @@ module.exports = {
 
 async function newOther(data) {
     try {
-        const { name, id_number, total_amount,paid_amount, mobileNumber, createdUser, updatedUser, 
+        const { name, id_number, total_amount,paid_amount, mobilenumber, createdUser, updatedUser, 
             sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks } = data
         let date = moment().format("DD-MM-YYYY")
         await commonQuery.exexuteQuery(other.CREATE_NEW_OTHER, [name, id_number, total_amount,
-            paid_amount, mobileNumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,(`{"amount":"${paid_amount}","date":"${date}"}`)])
+            paid_amount, mobilenumber, createdUser, updatedUser, sub_category,sponser_name,agent,agent_amount,paid_date,service,remarks,(`{"amount":"${paid_amount}","date":"${date}"}`)])
         return true
     } catch (error) {
         console.log(error)

@@ -60,7 +60,7 @@ const UPDATE_OTHER_AGENT_DETAILS = `UPDATE other SET agent = $2, agent_amount = 
 
 const DELETE_OTHER = `DELETE FROM other WHERE id = $1`
 
-const PATCH_OTHER = `UPDATE other SET agent = $2, agent_amount = $3, paid_date = $4, name = $5, id_number = $6, total_amount = $7, mobileNumber = $8, sub_category = $9, sponser_name = $10, service = $11, remarks = $12 WHERE id = $1`
+const PATCH_OTHER = `UPDATE other SET agent = $2, agent_amount = $3, paid_date = $4, name = $5, id_number = $6, total_amount = $7, mobileNumber = $8, sub_category = $9, sponser_name = $10, service = $11, remarks = $12, status = $13 WHERE id = $1`
 
 module.exports = {
     CREATE_NEW_OTHER,

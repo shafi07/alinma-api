@@ -41,7 +41,7 @@ const UPDATE_INSURANCE_AGENT_DETAILS = `UPDATE insurance SET agent = $2, agent_a
 const DELETE_INSURANCE = `DELETE FROM insurance WHERE id = $1`
 
 const PATCH_INSURANCE = `UPDATE insurance SET agent = $2, agent_amount = $3, paid_date = $4, name = $5, id_number = $6, dob = $7, total_amount = $8, mobileNumber = $9, sub_category = $10,
-sponser_name = $11, service = $12, remarks = $13, company = $14, cr_number = $15 WHERE id = $1`
+sponser_name = $11, service = $12, remarks = $13, company = $14, cr_number = $15, status = $16 WHERE id = $1`
 
 module.exports = {
     CREATE_NEW_INSURANCE,
