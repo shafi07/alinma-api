@@ -4,27 +4,27 @@ const CREATE_NEW_WORK = `INSERT INTO work (name,id_number,
 
 const GET_ALL_WORK = `SELECT DISTINCT ON(createdTime) id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,work_type,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
-    FROM work ORDER BY createdTime DESC LIMIT 50`
+    FROM work ORDER BY createdTime DESC LIMIT 300`
 
 const GET_ALL_WORK_QUERY = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,work_type,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
-    FROM work WHERE name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%'  LIMIT 100`
+    FROM work WHERE name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%'  LIMIT 200`
 
 const GET_ALL_WORK_STATUS = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,work_type,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
-    FROM work WHERE status = $1  LIMIT 100`
+    FROM work WHERE status = $1  LIMIT 200`
 
 const GET_ALL_WORK_QUERY_STATUS = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,work_type,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
-    FROM work WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
+    FROM work WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%') AND status = $2  LIMIT 200`
 
 const GET_ALL_WORK_CREDIT = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,work_type,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
-    FROM work WHERE balance_amount != '0'  LIMIT 100`
+    FROM work WHERE balance_amount != '0'  LIMIT 200`
 
 const GET_ALL_WORK_CREDIT_QUERY = `SELECT id,name,id_number,sponser_name,amount_paid_dates,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,work_type,
     total_amount,paid_amount,agent,mobileNumber,sub_category,balance_amount,fileId,status,agent_amount,service,paid_date,remarks
-    FROM work WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%') AND balance_amount != '0'  LIMIT 100`
+    FROM work WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%') AND balance_amount != '0'  LIMIT 200`
 
 const UPDATE_WORK = `UPDATE work SET modifiedTime = current_timestamp, paid_amount = (paid_amount + $2), amount_paid_dates = amount_paid_dates || $3::jsonb WHERE id = $1`
 

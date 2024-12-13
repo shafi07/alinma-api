@@ -96,7 +96,6 @@ module.exports = {
 
     async patchOther(req, res) {
         try { 
-            console.log('>><<<<',req.body)
             const { id, agent_amount, agent, paid_date, name, id_number, total_amount, mobilenumber, sub_category,
                 sponser_name, service, remarks,paid_amount,status } = req.body
             await Promise.all([commonQuery.exexuteQuery(other.PATCH_OTHER, [id, agent, agent_amount, paid_date, name, id_number, total_amount, mobilenumber, sub_category, sponser_name, service, remarks,status]),updatePayment(id,paid_amount)])

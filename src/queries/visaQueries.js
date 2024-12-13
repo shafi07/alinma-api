@@ -4,11 +4,11 @@ const CREATE_NEW_VISA = `INSERT INTO visa (name,id_number,
 
 const GET_ALL_VISA = `SELECT DISTINCT ON(createdTime) id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,application_number,travels,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
-    FROM visa ORDER BY createdTime DESC LIMIT 50`
+    FROM visa ORDER BY createdTime DESC LIMIT 300`
 
 const GET_ALL_VISA_QUERY = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,application_number,travels,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
-    FROM visa WHERE name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%'  LIMIT 100`
+    FROM visa WHERE name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%'  LIMIT 200`
 
 // const GET_ALL_VISA_QUERY = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,
 //     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
@@ -16,19 +16,19 @@ const GET_ALL_VISA_QUERY = `SELECT id,name,id_number,sponser_name,visa_number,to
 
 const GET_ALL_VISA_STATUS = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,application_number,travels,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
-    FROM visa WHERE status = $1 LIMIT 100`
+    FROM visa WHERE status = $1 LIMIT 200`
 
 const GET_ALL_VISA_QUERY_STATUS = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,application_number,travels,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
-    FROM visa WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%') AND status = $2  LIMIT 100`
+    FROM visa WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%') AND status = $2  LIMIT 200`
 
 const GET_ALL_VISA_CREDIT = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,application_number,travels,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
-    FROM visa WHERE balance_amount != '0' LIMIT 100`
+    FROM visa WHERE balance_amount != '0' LIMIT 200`
 
 const GET_ALL_VISA_QUERY_CREDIT = `SELECT id,name,id_number,sponser_name,visa_number,to_char(createdTime,'DD/MM/YYYY') createdDate,government_fee,application_number,travels,
     total_amount,paid_amount,mobileNumber,sub_category,balance_amount,fileId,status,agent,agent_amount,paid_date,service,remarks,chamber_amount,amount_paid_dates
-    FROM visa WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%') AND balance_amount != '0'  LIMIT 100`
+    FROM visa WHERE (name ILIKE '%' || $1 || '%' OR mobileNumber ILIKE '%' || $1 || '%' OR id_number ILIKE '%' || $1 || '%' OR fileId ILIKE '%' || $1 || '%') AND balance_amount != '0'  LIMIT 200`
 
 
 const UPDATE_VISA = `UPDATE visa SET modifiedTime = current_timestamp, paid_amount = (paid_amount + $2), amount_paid_dates = amount_paid_dates || $3::jsonb WHERE id = $1`
