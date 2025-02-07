@@ -145,6 +145,34 @@ modifiedTime TIMESTAMP WITHOUT TIME ZONE,
 	FOREIGN KEY(updatedUser) references users(id)
 );
 
+CREATE TABLE IF NOT EXISTS zakath(
+id SERIAL PRIMARY KEY,
+fileId VARCHAR GENERATED ALWAYS AS ('ZK' || id::VARCHAR) STORED,
+name VARCHAR,
+id_number VARCHAR,
+amount_paid_dates JSONB[],
+paid_date VARCHAR,
+zareeba_date VARCHAR,
+payment_method VARCHAR,
+status VARCHAR default 'pending',
+sub_category VARCHAR,
+purchase_amount NUMERIC,
+sales_amount NUMERIC,
+service NUMERIC,
+total_amount NUMERIC,
+balance_amount NUMERIC GENERATED ALWAYS AS (service-paid_amount) STORED,
+paid_amount NUMERIC,
+sponser_name VARCHAR,
+mobileNumber VARCHAR,
+createdUser INTEGER,
+updatedUser INTEGER,
+remarks TEXT,
+createdTime TIMESTAMP WITHOUT TIME ZONE default current_timestamp,
+modifiedTime TIMESTAMP WITHOUT TIME ZONE,
+	FOREIGN KEY(createdUser) references users(id),
+	FOREIGN KEY(updatedUser) references users(id)
+);
+
 CREATE TABLE IF NOT EXISTS expense(
 id SERIAL PRIMARY KEY,
 fileId VARCHAR GENERATED ALWAYS AS ('EX' || id::VARCHAR) STORED,
@@ -162,6 +190,43 @@ modifiedTime TIMESTAMP WITHOUT TIME ZONE,
 	FOREIGN KEY(createdUser) references users(id),
 	FOREIGN KEY(updatedUser) references users(id)
 );
+
+CREATE TABLE IF NOT EXISTS user_credentials(
+id SERIAL PRIMARY KEY,
+fileId VARCHAR GENERATED ALWAYS AS ('CD' || id::VARCHAR) STORED,
+name VARCHAR,
+id_number VARCHAR,
+qiwa VARCHAR,
+absheer VARCHAR,
+absheer_mobileNumber VARCHAR,
+mobileNumber VARCHAR,
+dob VARCHAR,
+expiry_date VARCHAR,
+email VARCHAR,
+pwd VARCHAR,
+mudad VARCHAR,
+sijil VARCHAR,
+gosi VARCHAR,
+mudeer VARCHAR,
+mumeez_pwd VARCHAR,
+salama VARCHAR,
+post VARCHAR,
+baladi VARCHAR,
+tameeni VARCHAR,
+musanad VARCHAR,
+createdUser INTEGER,
+updatedUser INTEGER,
+createdTime TIMESTAMP WITHOUT TIME ZONE default current_timestamp,
+modifiedTime TIMESTAMP WITHOUT TIME ZONE,
+	FOREIGN KEY(createdUser) references users(id),
+	FOREIGN KEY(updatedUser) references users(id)
+);
+
+ALTER TABLE visa ADD COLUMN payment_method VARCHAR;
+ALTER TABLE insurance ADD COLUMN payment_method VARCHAR;
+ALTER TABLE javasath ADD COLUMN payment_method VARCHAR;
+ALTER TABLE other ADD COLUMN payment_method VARCHAR;
+ALTER TABLE work ADD COLUMN payment_method VARCHAR;
 
 ALTER TABLE work ADD COLUMN work_type VARCHAR;
 ALTER TABLE work ADD COLUMN government_fee NUMERIC;
@@ -183,6 +248,7 @@ CREATE INDEX javasath_name_gin_trgm_idx ON javasath USING gin (name gin_trgm_ops
 CREATE INDEX javasath_mobileNumber_gin_trgm_idx ON javasath USING gin (mobileNumber gin_trgm_ops);
 CREATE INDEX insurance_name_gin_trgm_idx ON insurance USING gin (name gin_trgm_ops);
 CREATE INDEX insurance_mobileNumber_gin_trgm_idx ON insurance USING gin (mobileNumber gin_trgm_ops);
+CREATE INDEX insurance_cr_number_gin_trgm_idx ON insurance USING gin (cr_number gin_trgm_ops);
 CREATE INDEX work_name_gin_trgm_idx ON work USING gin (name gin_trgm_ops);
 CREATE INDEX work_mobileNumber_gin_trgm_idx ON work USING gin (mobileNumber gin_trgm_ops);
 CREATE INDEX other_name_gin_trgm_idx ON other USING gin (name gin_trgm_ops);
@@ -257,8 +323,14 @@ reference_id VARCHAR(255),
 pyment_method VARCHAR(255),
 payment_status VARCHAR(255),
 isCompleted BOOLEAN,
+isCaptured BOOLEAN,
+isEnrolled BOOLEAN,
 userid BIGINT UNSIGNED,
 masaaq_id VARCHAR(255),
+masaq_registration TEXT,
+masaq_member TEXT,
+masaq_enrollment TEXT,
+webhook TEXT,
 createdtime TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 payment_id VARCHAR(255),
 FOREIGN KEY(userid) 
@@ -293,8 +365,9 @@ INSERT INTO coupon_product_link (coupon_id,masaaq_id) VALUES (1,'test001');
 
 INSERT INTO purchase (userid,masaaq_id) VALUES (1,'test001');
 
-'Access-Control-Allow-Origin': "*",
-'Access-Control-Allow-Headers': 'x-requested-with, Content-Type, origin, authorization, accept, client-security-token',
-'Access-Control-Allow-Methods':'GET,POST,OPTIONS,PUT,PATCH,DELETE',
-'Access-Control-Allow-Credentials': 'true',
+ALTER TABLE purchase ADD masaq_registration TEXT;
+
+ALTER TABLE purchase ADD masaq_member TEXT;
+
+ALTER TABLE purchase ADD masaq_enrollment TEXT;
 

@@ -97,8 +97,8 @@ module.exports = {
     async patchWork(req, res) {
         try {
             const { id, agent_amount, agent, paid_date, name, id_number,work_type,
-                total_amount, mobilenumber, sub_category, sponser_name, service, remarks, government_fee,paid_amount,status } = req.body
-            await Promise.all([commonQuery.exexuteQuery(work.PATCH_WORK, [id, agent, agent_amount, paid_date, name, id_number, total_amount, mobilenumber, sub_category, sponser_name, service, remarks, government_fee,work_type,status]),updatePayment(id,paid_amount)])
+                total_amount, mobilenumber, sub_category, sponser_name, service, remarks, government_fee,paid_amount,status,payment_method } = req.body
+            await Promise.all([commonQuery.exexuteQuery(work.PATCH_WORK, [id, agent, agent_amount, paid_date, name, id_number, total_amount, mobilenumber, sub_category, sponser_name, service, remarks, government_fee,work_type,status,payment_method]),updatePayment(id,paid_amount)])
             return res.status(200).json({
                 message: "Work Data Updated successfully",
             });

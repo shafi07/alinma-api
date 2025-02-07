@@ -90,10 +90,10 @@ module.exports = {
     async patchInsurance(req, res) {
         try {
             const { id, agent_amount, agent, paid_date, name, id_number, dob, total_amount, mobilenumber, sub_category,
-                sponser_name, service, remarks,company,cr_number,paid_amount,status } = req.body
+                sponser_name, service, remarks,company,cr_number,paid_amount,status,payment_method } = req.body
             
             await Promise.all([commonQuery.exexuteQuery(insurance.PATCH_INSURANCE, [id, agent, agent_amount, paid_date, name, id_number, dob, total_amount, mobilenumber, sub_category,
-                sponser_name, service, remarks,company,cr_number,status]),updatePayment(id,paid_amount)])
+                sponser_name, service, remarks,company,cr_number,status,payment_method,]),updatePayment(id,paid_amount)])
             return res.status(200).json({
                 message: "Insurance Data Updated successfully",
             });

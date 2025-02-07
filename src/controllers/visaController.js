@@ -90,9 +90,9 @@ module.exports = {
     async patchVisa(req, res) {
         try {
             const { id, name, id_number, total_amount, mobilenumber, sub_category, sponser_name,
-                service, remarks, visa_number, chamber_amount, government_fee,agent_amount,agent,paid_date,paid_amount,application_number,travels,status } = req.body
+                service, remarks, visa_number, chamber_amount, government_fee,agent_amount,agent,paid_date,paid_amount,application_number,travels,status,payment_method } = req.body
             await Promise.all([commonQuery.exexuteQuery(visa.PATCH_VISA, [id, name, id_number, total_amount, mobilenumber, sub_category, sponser_name,
-                service, remarks, visa_number, chamber_amount, government_fee,agent_amount,agent,paid_date,application_number,travels,status])],updatePayment(id,paid_amount))
+                service, remarks, visa_number, chamber_amount, government_fee,agent_amount,agent,paid_date,application_number,travels,status,payment_method])],updatePayment(id,paid_amount))
             return res.status(200).json({
                 message: "Visa Data Updated successfully",
             });

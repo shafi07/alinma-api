@@ -90,9 +90,9 @@ module.exports = {
     async patchJavasath(req, res) {
         try {
             const { id, agent_amount, agent, paid_date, sponser_name, name, id_number, purpose, iqama, insurance,absheer_amount,qiwa_amount,government_fee,new_passport_number,expiry_date,
-                other, total_amount, paid_amount, service, mobilenumber, mol, sub_category, remarks, professionName, newSponser, due,re_entry_type,boarder_number,status } = req.body
+                other, total_amount, paid_amount, service, mobilenumber, mol, sub_category, remarks, professionName, newSponser, due,re_entry_type,boarder_number,status,payment_method } = req.body
             await Promise.all([commonQuery.exexuteQuery(javsath.PATCH_JAVASATH, [id, agent, agent_amount, paid_date, sponser_name, name, id_number, purpose, iqama, insurance,
-                other, total_amount, service, mobilenumber, mol, sub_category, remarks, professionName, newSponser, due,absheer_amount,qiwa_amount,government_fee,new_passport_number,expiry_date,re_entry_type,boarder_number,status]),updatePayment(id,paid_amount)])
+                other, total_amount, service, mobilenumber, mol, sub_category, remarks, professionName, newSponser, due,absheer_amount,qiwa_amount,government_fee,new_passport_number,expiry_date,re_entry_type,boarder_number,status,payment_method]),updatePayment(id,paid_amount)])
             
             return res.status(200).json({
                 message: "Javasath Data Updated successfully",

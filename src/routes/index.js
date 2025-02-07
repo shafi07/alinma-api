@@ -11,5 +11,6 @@ routes.use('/visa', require('./visa'))
 routes.use('/expense', require('./expense'))
 routes.use('/agent', require('./agent'))
 routes.use('/customer', require('./customer'))
+routes.use('/zakath', require('./zakath'))
 
 module.exports = routes
