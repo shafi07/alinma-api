@@ -33,6 +33,15 @@ createdUser INTEGER,
 updatedUser INTEGER,
 createdTime TIMESTAMP WITHOUT TIME ZONE default current_timestamp,
 modifiedTime TIMESTAMP WITHOUT TIME ZONE,
+due VARCHAR,
+government_fee NUMERIC,
+absheer_amount NUMERIC,
+qiwa_amount NUMERIC,
+new_passport_number VARCHAR,
+expiry_date VARCHAR,
+re_entry_type VARCHAR,
+boarder_number VARCHAR,
+payment_method VARCHAR,
 	FOREIGN KEY(createdUser) references users(id),
 	FOREIGN KEY(updatedUser) references users(id)
 );
@@ -44,7 +53,7 @@ name VARCHAR,
 id_number VARCHAR,
 amount_paid_dates JSONB[],
 add_or_new VARCHAR,
-sub_category VARCHAR,
+sub_category VARCHAR default 'New',
 dob VARCHAR,
 agent VARCHAR,
 agent_amount NUMERIC,
@@ -61,6 +70,9 @@ updatedUser INTEGER,
 remarks TEXT,
 createdTime TIMESTAMP WITHOUT TIME ZONE default current_timestamp,
 modifiedTime TIMESTAMP WITHOUT TIME ZONE,
+company VARCHAR,
+cr_number VARCHAR,
+payment_method VARCHAR,
 	FOREIGN KEY(createdUser) references users(id),
 	FOREIGN KEY(updatedUser) references users(id)
 );
@@ -87,6 +99,9 @@ updatedUser INTEGER,
 remarks TEXT,
 createdTime TIMESTAMP WITHOUT TIME ZONE default current_timestamp,
 modifiedTime TIMESTAMP WITHOUT TIME ZONE,
+government_fee NUMERIC,
+work_type VARCHAR,
+payment_method VARCHAR,
 	FOREIGN KEY(createdUser) references users(id),
 	FOREIGN KEY(updatedUser) references users(id)
 );
@@ -113,6 +128,7 @@ updatedUser INTEGER,
 remarks TEXT,
 createdTime TIMESTAMP WITHOUT TIME ZONE default current_timestamp,
 modifiedTime TIMESTAMP WITHOUT TIME ZONE,
+payment_method VARCHAR,
 	FOREIGN KEY(createdUser) references users(id),
 	FOREIGN KEY(updatedUser) references users(id)
 );
@@ -141,6 +157,10 @@ updatedUser INTEGER,
 remarks TEXT,
 createdTime TIMESTAMP WITHOUT TIME ZONE default current_timestamp,
 modifiedTime TIMESTAMP WITHOUT TIME ZONE,
+government_fee NUMERIC,
+application_number VARCHAR,
+travels VARCHAR,
+payment_method VARCHAR,
 	FOREIGN KEY(createdUser) references users(id),
 	FOREIGN KEY(updatedUser) references users(id)
 );
@@ -218,30 +238,10 @@ createdUser INTEGER,
 updatedUser INTEGER,
 createdTime TIMESTAMP WITHOUT TIME ZONE default current_timestamp,
 modifiedTime TIMESTAMP WITHOUT TIME ZONE,
+remarks TEXT,
 	FOREIGN KEY(createdUser) references users(id),
 	FOREIGN KEY(updatedUser) references users(id)
 );
-
-ALTER TABLE visa ADD COLUMN payment_method VARCHAR;
-ALTER TABLE insurance ADD COLUMN payment_method VARCHAR;
-ALTER TABLE javasath ADD COLUMN payment_method VARCHAR;
-ALTER TABLE other ADD COLUMN payment_method VARCHAR;
-ALTER TABLE work ADD COLUMN payment_method VARCHAR;
-
-ALTER TABLE work ADD COLUMN work_type VARCHAR;
-ALTER TABLE work ADD COLUMN government_fee NUMERIC;
-ALTER TABLE visa ADD COLUMN government_fee NUMERIC;
-ALTER TABLE insurance ADD COLUMN company VARCHAR;
-ALTER TABLE javasath ADD COLUMN due VARCHAR;
-ALTER TABLE javasath ADD COLUMN boarder_number VARCHAR;
-
-ALTER TABLE javasath ADD COLUMN government_fee NUMERIC;
-ALTER TABLE javasath ADD COLUMN absheer_amount NUMERIC;
-ALTER TABLE javasath ADD COLUMN qiwa_amount NUMERIC;
-ALTER TABLE javasath ADD COLUMN new_passport_number VARCHAR;
-ALTER TABLE javasath ADD COLUMN expiry_date VARCHAR;
-ALTER TABLE visa ADD COLUMN application_number VARCHAR;
-ALTER TABLE visa ADD COLUMN travels VARCHAR;
 
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 CREATE INDEX javasath_name_gin_trgm_idx ON javasath USING gin (name gin_trgm_ops);
